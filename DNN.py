@@ -85,8 +85,8 @@ class Classification(nn.Module):
 # ------------------------------------------------------- 数据准备 ------------------------------------------------------
 print('载入数据……')
 # 读取训练数据
-data_path = './data/Indian_pines_corrected.mat'
-label_path = './data/Indian_pines_gt.mat'
+data_path = 'data/Indian_pines/Indian_pines_corrected.mat'
+label_path = 'data/Indian_pines/Indian_pines_gt.mat'
 data = scio.loadmat(data_path)['indian_pines_corrected'].reshape(-1, 200)
 label = scio.loadmat(label_path)['indian_pines_gt'].flatten()
 # 统计各类像素的数据
@@ -240,7 +240,7 @@ for loop in range(loops):
     CC_temp.eval()  # 评估模式，dropout关闭
     # 载入并更新网络权重参数
     weights_net = torch.load(
-        'F:/学习文件/2021秋-模式识别/模式识别基础大作业——高光谱图像语义分割/HyperspectralSegmentation/models/DNN_NOBG_' + str(
+        './models/DNN_NOBG_' + str(
             epoch_best) + '.pth', map_location='cpu')
     CC_temp.load_state_dict(weights_net)
 
