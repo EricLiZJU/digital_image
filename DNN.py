@@ -20,30 +20,16 @@ number_classes = 16  # 分割类别（不含背景类）
 features_num = 200  # 特征数
 loops = 1
 
-# # 100个loop平均准确率83.45%，基础参数
-# epochs = 100
-# batch_size = 512
-# neurons = 128
-# dropout_c = 0.5
-# rate = 0.7                                          # 训练数据占比
-
-# # 100个loop平均准确率87.26%，最佳epoch为490，89.92%
-# epochs = 500
-# batch_size = 1024
-# neurons = 128
-# dropout_c = 0.5
-# rate = 0.7                                          # 训练数据占比
-
-# 50个loop平均准确率89.48%，最佳epoch为200，91.56%
 epochs = 200
 batch_size = 1024
 neurons = 256
-dropout_c = 0.5
+dropout_c = 0.3
 rate = 0.7  # 训练数据占比
 epoch_best = 200
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("mps" if torch.mps.is_available() else "cpu")
 # ------------------------------------------------------------ 定义网络结构 ------------------------------------------------------------
 print('构建模型……')
+print(device)
 
 
 class Classification(nn.Module):
@@ -85,10 +71,18 @@ class Classification(nn.Module):
 # ------------------------------------------------------- 数据准备 ------------------------------------------------------
 print('载入数据……')
 # 读取训练数据
+
 data_path = 'data/Indian_pines/Indian_pines_corrected.mat'
 label_path = 'data/Indian_pines/Indian_pines_gt.mat'
 data = scio.loadmat(data_path)['indian_pines_corrected'].reshape(-1, 200)
 label = scio.loadmat(label_path)['indian_pines_gt'].flatten()
+
+"""
+data_path = 'data/Pavia_university/PaviaU.mat'
+label_path = 'data/Pavia_university/PaviaU_gt.mat'
+data = scio.loadmat(data_path)['paviaU'].reshape(-1, 200)
+label = scio.loadmat(label_path)['paviaU_gt'].flatten()
+"""
 # 统计各类像素的数据
 count = {0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [], 8: [], 9: [], 10: [], 11: [], 12: [], 13: [], 14: [],
          15: []}
@@ -214,11 +208,14 @@ for loop in range(loops):
         epochs_x.append(epoch + 1)
 
     # # 最终模型保存
-    # torch.save(CC.state_dict(), './models/DNN_NOBG_final.pth')
-    # torch.save(optimizer.state_dict(), './models/DNN_NOBG_optimizer_final.pth')
+    torch.save(CC.state_dict(), './models/DNN_NOBG_final.pth')
+    torch.save(optimizer.state_dict(), './models/DNN_NOBG_optimizer_final.pth')
 
     # 损失可视化
     import matplotlib.pyplot as plt
+    import matplotlib
+
+    matplotlib.rcParams['font.family'] = 'Times New Roman'
 
     plt.figure('loss')
     plt.plot(epochs_x, loss_epochs_train, label='Training loss')
@@ -226,7 +223,15 @@ for loop in range(loops):
     plt.xlabel('epochs')
     plt.ylabel('loss')
     plt.legend(frameon=False)
+    plt.title(f'loss of DNN on Indian_pines dataset', fontsize=12, y=1.02)
+    # 添加副标题，使用 Axes 坐标系 (0,0)-(1,1)，y=1.02 就在标题正下方
+    plt.text(0.5, 0.96,
+             f'(batch_size:{batch_size}, neurons:{neurons}, dropout_rate:{dropout_c})',
+             fontsize=10, ha='center', transform=plt.gca().transAxes)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    plt.savefig("figures/Indian_pines_DNN_loss_8.pdf", bbox_inches='tight')
     plt.show()
+
 
     epoch_best = int(loss_epochs_test.index(min(loss_epochs_test)) / 10 + 0.6) * 10
     if epoch_best < 10:
