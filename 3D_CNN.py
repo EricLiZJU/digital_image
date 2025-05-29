@@ -110,10 +110,19 @@ def train_and_evaluate(run_seed=42):
     # -------- 数据准备 --------
     h, w = 145, 145
     data_reshaped = data.reshape(h * w, 200)
-    data_cube = data.reshape(h, w, 200)
+
+    # --- PCA: 从200通道降到30通道 ---
+    pca = PCA(n_components=30)
+    data_pca = pca.fit_transform(data_reshaped)  # shape: (h*w, 30)
+    data_cube = data_pca.reshape(h, w, 30)  # shape: (145, 145, 30)
+
     label_map = label.reshape(h, w)
 
-    patches, patch_labels = extract_3d_patches(data_cube, label_map, patch_size=7, spectral_channels=30)
+    # --- 提取 3D patch 数据 ---
+    patches, patch_labels = extract_3d_patches(
+        data_cube, label_map,
+        patch_size=7, spectral_channels=30  # 注意要和前面一致
+    )
 
     # 划分训练、验证、测试集
     X_train_full, X_test, y_train_full, y_test = train_test_split(
