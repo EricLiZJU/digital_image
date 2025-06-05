@@ -104,21 +104,27 @@ class CNN2D(nn.Module):
         x = self.fc_layers(x)
         return x
 
-
+"""
 data_path = 'data/Indian_pines/Indian_pines_corrected.mat'
 label_path = 'data/Indian_pines/Indian_pines_gt.mat'
-data = scio.loadmat(data_path)['indian_pines_corrected'].reshape(-1, 200)
+data = scio.loadmat(data_path)['indian_pines_corrected']
+h, w, bands = data.shape
 label = scio.loadmat(label_path)['indian_pines_gt'].flatten()
+"""
+data_path = 'data/Salinas/Salinas_corrected.mat'
+label_path = 'data/Salinas/Salinas_gt.mat'
+data = scio.loadmat(data_path)['salinas_corrected']
+h, w, bands = data.shape
+label = scio.loadmat(label_path)['salinas_gt'].flatten()
 
 def train_and_evaluate(run_seed=42):
 
     set_seed(run_seed)
     # 数据准备
-    h, w = 145, 145
-    data_reshaped = data.reshape(h * w, 200)
+    data_reshaped = data.reshape(h * w, bands)
     pca = PCA(n_components=3)
     data_pca = pca.fit_transform(data_reshaped).reshape(h, w, 3)
-    label_map = label.reshape(h, w)
+    label_map = scio.loadmat(label_path)['salinas_gt']
 
     # 提取 Patch 数据
     patches, patch_labels = extract_patches(data_pca, label_map, patch_size=7)
@@ -250,7 +256,7 @@ def train_and_evaluate(run_seed=42):
 
     plt.suptitle(f"Indian Pines - 2D-CNN Result (Seed {run_seed})", fontsize=14)
     os.makedirs("figures", exist_ok=True)
-    plt.savefig(f"figures/Indian_pines_2DCNN_run{run_seed}.pdf", bbox_inches='tight')
+    plt.savefig(f"figures/Indian_pines_2DCNN_run{run_seed}_salinas.pdf", bbox_inches='tight')
     plt.close()
 
     # === Loss 曲线图绘制 ===
@@ -263,7 +269,7 @@ def train_and_evaluate(run_seed=42):
     plt.legend()
     plt.grid(True)
     os.makedirs("figures", exist_ok=True)
-    plt.savefig(f"figures/2DCNN_loss_seed{run_seed}.pdf", bbox_inches='tight')
+    plt.savefig(f"figures/2DCNN_loss_seed{run_seed}_salinas.pdf", bbox_inches='tight')
     plt.close()
 
     return acc
@@ -289,7 +295,7 @@ for i, acc in enumerate(accuracies):
 print(f"\nAverage Accuracy: {mean_acc:.2f}%, Std Dev: {std_acc:.2f}%")
 
 os.makedirs("results", exist_ok=True)
-with open("results/2dcnn_repeat_results.txt", "w") as f:
+with open("results/2dcnn_repeat_results_salinas.txt", "w") as f:
     for i, acc in enumerate(accuracies):
         f.write(f"Run {i+1}: {acc:.2f}%\n")
     f.write(f"\nAverage Accuracy: {mean_acc:.2f}%\n")
