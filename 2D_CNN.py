@@ -111,11 +111,11 @@ data = scio.loadmat(data_path)['indian_pines_corrected']
 h, w, bands = data.shape
 label = scio.loadmat(label_path)['indian_pines_gt'].flatten()
 """
-data_path = 'data/Salinas/Salinas_corrected.mat'
-label_path = 'data/Salinas/Salinas_gt.mat'
-data = scio.loadmat(data_path)['salinas_corrected']
+data_path = 'data/Pavia_university/PaviaU.mat'
+label_path = 'data/Pavia_university/PaviaU_gt.mat'
+data = scio.loadmat(data_path)['paviaU']
 h, w, bands = data.shape
-label = scio.loadmat(label_path)['salinas_gt'].flatten()
+label = scio.loadmat(label_path)['paviaU_gt'].flatten()
 
 def train_and_evaluate(run_seed=42):
 
@@ -124,7 +124,7 @@ def train_and_evaluate(run_seed=42):
     data_reshaped = data.reshape(h * w, bands)
     pca = PCA(n_components=3)
     data_pca = pca.fit_transform(data_reshaped).reshape(h, w, 3)
-    label_map = scio.loadmat(label_path)['salinas_gt']
+    label_map = label.reshape(h, w)
 
     # 提取 Patch 数据
     patches, patch_labels = extract_patches(data_pca, label_map, patch_size=7)
@@ -158,7 +158,8 @@ def train_and_evaluate(run_seed=42):
     )
 
     # 模型定义
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    # device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = CNN2D(in_channels=3, num_classes=16).to(device)
     optimizer = optim.Adadelta(model.parameters())
     criterion = nn.CrossEntropyLoss()
@@ -254,9 +255,9 @@ def train_and_evaluate(run_seed=42):
     axs[1].set_title(f"Prediction (Acc: {acc:.2f}%)")
     axs[1].axis('off')
 
-    plt.suptitle(f"Indian Pines - 2D-CNN Result (Seed {run_seed})", fontsize=14)
+    plt.suptitle(f"PaviaU - 2D-CNN Result (Seed {run_seed})", fontsize=14)
     os.makedirs("figures", exist_ok=True)
-    plt.savefig(f"figures/Indian_pines_2DCNN_run{run_seed}_salinas.pdf", bbox_inches='tight')
+    plt.savefig(f"figures/PaviaU_2DCNN_run{run_seed}.pdf", bbox_inches='tight')
     plt.close()
 
     # === Loss 曲线图绘制 ===
@@ -269,7 +270,7 @@ def train_and_evaluate(run_seed=42):
     plt.legend()
     plt.grid(True)
     os.makedirs("figures", exist_ok=True)
-    plt.savefig(f"figures/2DCNN_loss_seed{run_seed}_salinas.pdf", bbox_inches='tight')
+    plt.savefig(f"figures/2DCNN_loss_seed{run_seed}_pavia.pdf", bbox_inches='tight')
     plt.close()
 
     return acc
@@ -295,7 +296,7 @@ for i, acc in enumerate(accuracies):
 print(f"\nAverage Accuracy: {mean_acc:.2f}%, Std Dev: {std_acc:.2f}%")
 
 os.makedirs("results", exist_ok=True)
-with open("results/2dcnn_repeat_results_salinas.txt", "w") as f:
+with open("results/2dcnn_repeat_results_pavia.txt", "w") as f:
     for i, acc in enumerate(accuracies):
         f.write(f"Run {i+1}: {acc:.2f}%\n")
     f.write(f"\nAverage Accuracy: {mean_acc:.2f}%\n")
