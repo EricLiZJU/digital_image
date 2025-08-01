@@ -160,6 +160,7 @@ def train_and_evaluate(run_seed=42):
     # 模型定义
     # device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(device)
     model = CNN2D(in_channels=3, num_classes=16).to(device)
     optimizer = optim.Adadelta(model.parameters())
     criterion = nn.CrossEntropyLoss()

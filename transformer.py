@@ -157,7 +157,8 @@ def train_and_evaluate(run_seed=42):
     )
 
     # 模型定义
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    # device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = TransformerModel(
         input_dim=30,  # 每个patch有30个光谱通道
         embedding_dim=128,
