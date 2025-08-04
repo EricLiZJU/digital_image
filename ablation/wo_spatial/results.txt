@@ -1,0 +1,15 @@
+## Botswana
+
+📊 Summary of Repeated Training:
+Run 1: 100.00%
+Run 2: 99.80%
+Run 3: 100.00%
+Run 4: 99.18%
+Run 5: 99.59%
+Run 6: 99.80%
+Run 7: 99.18%
+Run 8: 99.59%
+Run 9: 99.80%
+Run 10: 99.80%
+
+Average Accuracy: 99.67%, Std Dev: 0.28%

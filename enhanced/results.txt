@@ -81,6 +81,34 @@ Run 10: 86.61%
 
 Average Accuracy: 87.83%, Std Dev: 2.79%
 
+## Pavia_U
 
+📊 Summary of Repeated Training:
+Run 1: 99.33%
+Run 2: 99.21%
+Run 3: 99.58%
+Run 4: 98.63%
+Run 5: 99.24%
+Run 6: 99.08%
+Run 7: 99.53%
+Run 8: 98.68%
+Run 9: 99.44%
+Run 10: 94.30%
 
+Average Accuracy: 98.70%, Std Dev: 1.50%
 
+## Botswana
+
+📊 Summary of Repeated Training:
+Run 1: 99.39%
+Run 2: 100.00%
+Run 3: 99.59%
+Run 4: 99.80%
+Run 5: 99.59%
+Run 6: 99.80%
+Run 7: 99.59%
+Run 8: 99.80%
+Run 9: 99.80%
+Run 10: 99.39%
+
+Average Accuracy: 99.67%, Std Dev: 0.19%
