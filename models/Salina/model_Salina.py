@@ -131,18 +131,42 @@ def train_and_evaluate(run_seed=42, dataset_name="Salina"):
     data = scio.loadmat(data_path)['salinas_corrected']
     label = scio.loadmat(label_path)['salinas_gt'].flatten()
     h, w, bands = data.shape
-    data_reshaped = data.reshape(h * w, bands)
-
-    pca = PCA(n_components=30)
-    data_pca = pca.fit_transform(data_reshaped)
-    data_cube = data_pca.reshape(h, w, 30)
     label_map = label.reshape(h, w)
 
-    patches, patch_labels = extract_3d_patches(data_cube, label_map, patch_size=7, spectral_channels=30)
+    # 2. 提取原始 Patch（不做 PCA，只截取前 N 个通道）
+    patches_raw, patch_labels = extract_3d_patches(data, label_map, patch_size=7, spectral_channels=bands)
     num_classes = int(patch_labels.max()) + 1
+    print(f"[Debug] raw patches shape = {patches_raw.shape}, num_classes = {num_classes}")
 
-    X_train_full, X_test, y_train_full, y_test = train_test_split(patches, patch_labels, test_size=0.15, stratify=patch_labels, random_state=42)
-    X_train, X_val, y_train, y_val = train_test_split(X_train_full, y_train_full, test_size=0.176, stratify=y_train_full, random_state=42)
+    # 3. 划分数据集（保留原始 patch 结构）
+    X_train_raw, X_test_raw, y_train, y_test = train_test_split(
+        patches_raw, patch_labels, test_size=0.15, stratify=patch_labels, random_state=42
+    )
+    X_train_raw, X_val_raw, y_train, y_val = train_test_split(
+        X_train_raw, y_train, test_size=0.176, stratify=y_train, random_state=42
+    )
+
+    # 4. 拉平用于 PCA：从 (N, 1, C, H, W) → (N, C×H×W)
+    def flatten_for_pca(patches):
+        return patches.reshape(patches.shape[0], -1)
+
+    X_train_flat = flatten_for_pca(X_train_raw)
+    X_val_flat = flatten_for_pca(X_val_raw)
+    X_test_flat = flatten_for_pca(X_test_raw)
+
+    # 5. 拟合 PCA（仅在训练集上）
+    pca = PCA(n_components=30)
+    X_train_pca = pca.fit_transform(X_train_flat)
+    X_val_pca = pca.transform(X_val_flat)
+    X_test_pca = pca.transform(X_test_flat)
+
+    # 6. 恢复成 CNN 输入形状：从 (N, 30) → (N, 1, 30, 7, 7)
+    def reshape_after_pca(X_pca, patch_size=7):
+        return X_pca.reshape(-1, 1, 30, patch_size, patch_size)
+
+    X_train = reshape_after_pca(X_train_pca)
+    X_val = reshape_after_pca(X_val_pca)
+    X_test = reshape_after_pca(X_test_pca)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = CNN3D(in_channels=30, num_classes=num_classes).to(device)

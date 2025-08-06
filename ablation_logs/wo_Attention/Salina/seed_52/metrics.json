@@ -1,25 +1,25 @@
 {
   "seed": 52,
   "dataset": "Salina",
-  "overall_accuracy": 99.1872,
-  "average_accuracy": 0.996,
-  "kappa": 0.9909,
+  "overall_accuracy": 99.6921,
+  "average_accuracy": 0.9979,
+  "kappa": 0.9966,
   "per_class_accuracy": [
     1.0,
     1.0,
     1.0,
-    0.9952,
+    1.0,
+    0.99,
     1.0,
     1.0,
+    0.9953,
     1.0,
-    0.9894,
-    1.0,
-    1.0,
+    0.998,
     0.9938,
     1.0,
     1.0,
     1.0,
-    0.9578,
+    0.9899,
     1.0
   ]
 }

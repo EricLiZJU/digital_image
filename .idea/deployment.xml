@@ -2,13 +2,6 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="Always" serverName="root@instance-ojj46zx8.zju.smartml.cn:20004 password" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="root@connect.yza1.seetacloud.com:42226 password">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/tmp/pycharm_project_427" local="$PROJECT_DIR$" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="root@connect.yza1.seetacloud.com:51693 password">
         <serverdata>
           <mappings>
@@ -19,14 +12,7 @@
       <paths name="root@instance-ojj46zx8.zju.smartml.cn:20004 password">
         <serverdata>
           <mappings>
-            <mapping deploy="/tmp/pycharm_project_803" local="$PROJECT_DIR$" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="root@instance-ojj46zx8.zju.smartml.cn:20004 password (2)">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/tmp/pycharm_project_627" local="$PROJECT_DIR$" />
+            <mapping deploy="/tmp/pycharm_project_917" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

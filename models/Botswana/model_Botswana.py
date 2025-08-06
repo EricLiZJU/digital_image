@@ -132,17 +132,62 @@ def train_and_evaluate(run_seed=42, dataset_name="Botswana"):
     label = scio.loadmat(label_path)['Botswana_gt'].flatten()
     h, w, bands = data.shape
     data_reshaped = data.reshape(h * w, bands)
-
-    pca = PCA(n_components=30)
-    data_pca = pca.fit_transform(data_reshaped)
-    data_cube = data_pca.reshape(h, w, 30)
     label_map = label.reshape(h, w)
 
+    # 获取有效像素位置（非0标签）
+    valid_mask = label_map != 0
+    valid_data = data_reshaped[valid_mask.flatten()]
+    valid_labels = label_map[valid_mask] - 1  # 从0开始编号
+
+    # 拆分训练/验证/测试索引
+    X_train_full, X_test, y_train_full, y_test = train_test_split(
+        valid_data, valid_labels, test_size=0.15, stratify=valid_labels, random_state=run_seed
+    )
+    X_train, X_val, y_train, y_val = train_test_split(
+        X_train_full, y_train_full, test_size=0.176, stratify=y_train_full, random_state=run_seed
+    )
+
+    # ✅ 仅在训练集上拟合 PCA
+    pca = PCA(n_components=30)
+    X_train_pca = pca.fit_transform(X_train)
+    X_val_pca = pca.transform(X_val)
+    X_test_pca = pca.transform(X_test)
+
+    # 重新构建完整图的 PCA cube（用于 patch 提取 & 可视化）
+    data_pca_full = pca.transform(data_reshaped)  # (h*w, 30)
+    data_cube = data_pca_full.reshape(h, w, 30)
+
+    # 用新的 label_map + PCA cube 提取 patch
     patches, patch_labels = extract_3d_patches(data_cube, label_map, patch_size=7, spectral_channels=30)
     num_classes = int(patch_labels.max()) + 1
 
-    X_train_full, X_test, y_train_full, y_test = train_test_split(patches, patch_labels, test_size=0.15, stratify=patch_labels, random_state=42)
-    X_train, X_val, y_train, y_val = train_test_split(X_train_full, y_train_full, test_size=0.176, stratify=y_train_full, random_state=42)
+    # 找到和 X_train_pca 匹配的 patch 数据
+    X_train_patch, y_train_patch = [], []
+    X_val_patch, y_val_patch = [], []
+    X_test_patch, y_test_patch = [], []
+
+    patch_flat = patches.reshape(patches.shape[0], -1)  # 用于快速匹配
+
+    def find_indices(subset_pca):
+        indices = []
+        for vec in subset_pca:
+            dists = np.linalg.norm(patch_flat.reshape(patch_flat.shape[0], -1)[:, :30] - vec, axis=1)
+            idx = np.argmin(dists)
+            indices.append(idx)
+        return indices
+
+    train_indices = find_indices(X_train_pca)
+    val_indices = find_indices(X_val_pca)
+    test_indices = find_indices(X_test_pca)
+
+    X_train = patches[train_indices]
+    y_train = patch_labels[train_indices]
+    X_val = patches[val_indices]
+    y_val = patch_labels[val_indices]
+    X_test = patches[test_indices]
+    y_test = patch_labels[test_indices]
+    num_classes = int(patch_labels.max()) + 1
+
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = CNN3D(in_channels=30, num_classes=num_classes).to(device)
