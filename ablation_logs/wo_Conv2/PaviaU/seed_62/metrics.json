@@ -1,0 +1,18 @@
+{
+  "seed": 62,
+  "dataset": "PaviaU",
+  "overall_accuracy": 97.569,
+  "average_accuracy": 0.9672,
+  "kappa": 0.9678,
+  "per_class_accuracy": [
+    0.9467,
+    0.9954,
+    0.9016,
+    0.9826,
+    1.0,
+    0.9642,
+    0.9497,
+    0.9783,
+    0.9859
+  ]
+}

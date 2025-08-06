@@ -29,14 +29,22 @@ def set_seed(seed=42):
 
 
 class CNN3D(nn.Module):
-    def __init__(self, in_channels=30, num_classes=16, use_attention=True):
+    def __init__(self, in_channels=30, num_classes=16, use_attention=False,
+                 use_bn=False, use_dropout=True, use_conv2=True, use_fc64=True):
         super(CNN3D, self).__init__()
+        self.use_attention = use_attention
+        self.use_bn = use_bn
+        self.use_dropout = use_dropout
+        self.use_conv2 = use_conv2
+        self.use_fc64 = use_fc64
+
         self.spectral_conv = nn.Conv3d(1, 8, kernel_size=(7,1,1), padding=(3,0,0))
         self.spatial_conv = nn.Conv3d(8, 8, kernel_size=(1,3,3), padding=(0,1,1))
-        self.bn1 = nn.BatchNorm3d(8)
+        if self.use_bn:
+            self.bn1 = nn.BatchNorm3d(8)
         self.relu = nn.ReLU()
-        self.use_attention = use_attention
-        if use_attention:
+
+        if self.use_attention:
             self.attention = nn.Sequential(
                 nn.AdaptiveAvgPool3d((1, 1, 1)),
                 nn.Conv3d(8, 4, 1),
@@ -44,28 +52,48 @@ class CNN3D(nn.Module):
                 nn.Conv3d(4, 8, 1),
                 nn.Sigmoid()
             )
-        self.conv2 = nn.Conv3d(8, 16, kernel_size=3, padding=1)
-        self.bn2 = nn.BatchNorm3d(16)
+
+        if self.use_conv2:
+            self.conv2 = nn.Conv3d(8, 16, kernel_size=3, padding=1)
+            if self.use_bn:
+                self.bn2 = nn.BatchNorm3d(16)
+            self.final_channels = 16
+        else:
+            self.final_channels = 8
+
         self.pool = nn.AdaptiveAvgPool3d((1, 1, 1))
-        self.fc = nn.Sequential(
-            nn.Flatten(),
-            nn.Linear(16, 64),
-            nn.ReLU(),
-            nn.Dropout(0.5),
-            nn.Linear(64, num_classes)
-        )
+
+        if self.use_fc64:
+            fc_layers = [
+                nn.Flatten(),
+                nn.Linear(self.final_channels, 64),
+                nn.ReLU()
+            ]
+            if self.use_dropout:
+                fc_layers.append(nn.Dropout(0.5))
+            fc_layers.append(nn.Linear(64, num_classes))
+        else:
+            fc_layers = [
+                nn.Flatten(),
+                nn.Linear(self.final_channels, num_classes)
+            ]
+
+        self.fc = nn.Sequential(*fc_layers)
 
     def forward(self, x):
         x = self.spectral_conv(x)
         x = self.spatial_conv(x)
-        x = self.bn1(x)
+        if self.use_bn:
+            x = self.bn1(x)
         x = self.relu(x)
         if self.use_attention:
             att_map = self.attention(x)
             x = x * att_map
-        x = self.conv2(x)
-        x = self.bn2(x)
-        x = self.relu(x)
+        if self.use_conv2:
+            x = self.conv2(x)
+            if self.use_bn:
+                x = self.bn2(x)
+            x = self.relu(x)
         x = self.pool(x)
         x = self.fc(x)
         return x
@@ -92,7 +120,7 @@ def extract_3d_patches(img_cube, label_map, patch_size=7, spectral_channels=30, 
 
 
 def evaluate_and_log_metrics(y_true, y_pred, model, run_seed, dataset_name, acc, train_time=None, val_time=None):
-    log_dir = f"logs/{dataset_name}/seed_{run_seed}"
+    log_dir = f"ablation_logs/wo_Attention/{dataset_name}/seed_{run_seed}"
     os.makedirs(log_dir, exist_ok=True)
 
     conf_mat = confusion_matrix(y_true, y_pred)
@@ -254,7 +282,7 @@ def train_and_evaluate(run_seed=42, dataset_name="chikusei"):
     print(f"✅ Test Accuracy: {acc:.2f}%")
 
     # 日志路径
-    log_dir = f"ablation_logs/{dataset_name}/seed_{run_seed}"
+    log_dir = f"ablation_logs/wo_Attention/{dataset_name}/seed_{run_seed}"
     os.makedirs(log_dir, exist_ok=True)
 
     # 保存 loss 曲线

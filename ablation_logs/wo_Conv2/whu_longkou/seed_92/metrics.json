@@ -1,0 +1,17 @@
+{
+  "seed": 92,
+  "dataset": "whu_longkou",
+  "overall_accuracy": 91.1728,
+  "average_accuracy": 0.7679,
+  "kappa": 0.8797,
+  "per_class_accuracy": [
+    0.8974,
+    0.9835,
+    0.9319,
+    0.966,
+    0.0626,
+    0.9962,
+    0.73,
+    0.5759
+  ]
+}
