@@ -1,0 +1,13 @@
+📊 Summary of Repeated Training:
+Run 1: 99.91%
+Run 2: 98.88%
+Run 3: 98.97%
+Run 4: 99.88%
+Run 5: 99.72%
+Run 6: 99.52%
+Run 7: 99.92%
+Run 8: 99.88%
+Run 9: 99.74%
+Run 10: 99.03%
+
+Average Accuracy: 99.54%, Std Dev: 0.40%

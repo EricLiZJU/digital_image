@@ -1,0 +1,13 @@
+Run 1: 85.83%
+Run 2: 82.96%
+Run 3: 76.20%
+Run 4: 84.53%
+Run 5: 80.75%
+Run 6: 69.51%
+Run 7: 77.24%
+Run 8: 69.70%
+Run 9: 82.57%
+Run 10: 84.33%
+
+Average Accuracy: 79.36%
+Standard Deviation: 5.69%

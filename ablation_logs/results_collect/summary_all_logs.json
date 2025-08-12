@@ -1,0 +1,4493 @@
+{
+  "ow_BN": {
+    "PaviaU": {
+      "average": {
+        "seed": 87.0,
+        "OA": 98.744,
+        "AA": 0.9836,
+        "Kappa": 0.9834,
+        "Train Time (s)": 274.767,
+        "FLOPs(M)": 6.27,
+        "Params(K)": 5.92
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.6589,
+        "AA": 0.0182,
+        "Kappa": 0.0219,
+        "Train Time (s)": 52.0902,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.7351,
+          "AA": 0.9963,
+          "Kappa": 0.9965,
+          "Train Time (s)": 319.06,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 112,
+          "OA": 95.3405,
+          "AA": 0.9437,
+          "Kappa": 0.9381,
+          "Train Time (s)": 302.58,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 122,
+          "OA": 99.7507,
+          "AA": 0.9968,
+          "Kappa": 0.9967,
+          "Train Time (s)": 317.98,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 132,
+          "OA": 99.6416,
+          "AA": 0.9954,
+          "Kappa": 0.9953,
+          "Train Time (s)": 202.19,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 42,
+          "OA": 99.0806,
+          "AA": 0.9891,
+          "Kappa": 0.9878,
+          "Train Time (s)": 182.53,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 52,
+          "OA": 99.626,
+          "AA": 0.9917,
+          "Kappa": 0.995,
+          "Train Time (s)": 349.29,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 62,
+          "OA": 95.9327,
+          "AA": 0.9574,
+          "Kappa": 0.9467,
+          "Train Time (s)": 273.39,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 72,
+          "OA": 99.4702,
+          "AA": 0.9891,
+          "Kappa": 0.993,
+          "Train Time (s)": 276.44,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 82,
+          "OA": 99.6727,
+          "AA": 0.9937,
+          "Kappa": 0.9957,
+          "Train Time (s)": 253.06,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 92,
+          "OA": 99.1897,
+          "AA": 0.9831,
+          "Kappa": 0.9893,
+          "Train Time (s)": 271.15,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        }
+      ]
+    },
+    "whu_hanchuan": {
+      "average": {
+        "seed": 87.0,
+        "OA": 90.6838,
+        "AA": 0.8151,
+        "Kappa": 0.8902,
+        "Train Time (s)": 246.597,
+        "FLOPs(M)": 6.27,
+        "Params(K)": 6.355
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 3.8574,
+        "AA": 0.0605,
+        "Kappa": 0.0444,
+        "Train Time (s)": 94.504,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.1423
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 92.6679,
+          "AA": 0.8178,
+          "Kappa": 0.9138,
+          "Train Time (s)": 324.16,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.31
+        },
+        {
+          "seed": 112,
+          "OA": 90.402,
+          "AA": 0.8135,
+          "Kappa": 0.8875,
+          "Train Time (s)": 329.91,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.31
+        },
+        {
+          "seed": 122,
+          "OA": 90.5299,
+          "AA": 0.8107,
+          "Kappa": 0.8891,
+          "Train Time (s)": 206.89,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.31
+        },
+        {
+          "seed": 132,
+          "OA": 93.2954,
+          "AA": 0.8338,
+          "Kappa": 0.9214,
+          "Train Time (s)": 332.11,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.31
+        },
+        {
+          "seed": 42,
+          "OA": 98.1926,
+          "AA": 0.9657,
+          "Kappa": 0.9747,
+          "Train Time (s)": 407.43,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.76
+        },
+        {
+          "seed": 52,
+          "OA": 87.9386,
+          "AA": 0.7814,
+          "Kappa": 0.8579,
+          "Train Time (s)": 208.1,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.31
+        },
+        {
+          "seed": 62,
+          "OA": 88.2291,
+          "AA": 0.7862,
+          "Kappa": 0.8617,
+          "Train Time (s)": 161.98,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.31
+        },
+        {
+          "seed": 72,
+          "OA": 83.8252,
+          "AA": 0.7297,
+          "Kappa": 0.8105,
+          "Train Time (s)": 112.78,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.31
+        },
+        {
+          "seed": 82,
+          "OA": 92.6098,
+          "AA": 0.8204,
+          "Kappa": 0.9132,
+          "Train Time (s)": 192.36,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.31
+        },
+        {
+          "seed": 92,
+          "OA": 89.1471,
+          "AA": 0.7913,
+          "Kappa": 0.8727,
+          "Train Time (s)": 190.25,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.31
+        }
+      ]
+    },
+    "whu_honghu": {
+      "average": {
+        "seed": 87.0,
+        "OA": 97.1403,
+        "AA": 0.9248,
+        "Kappa": 0.9593,
+        "Train Time (s)": 323.096,
+        "FLOPs(M)": 6.27,
+        "Params(K)": 6.76
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.2037,
+        "AA": 0.0349,
+        "Kappa": 0.0173,
+        "Train Time (s)": 77.8571,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 95.3594,
+          "AA": 0.8924,
+          "Kappa": 0.9335,
+          "Train Time (s)": 258.52,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.76
+        },
+        {
+          "seed": 112,
+          "OA": 95.1361,
+          "AA": 0.8518,
+          "Kappa": 0.9308,
+          "Train Time (s)": 208.19,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.76
+        },
+        {
+          "seed": 122,
+          "OA": 97.9204,
+          "AA": 0.9576,
+          "Kappa": 0.9705,
+          "Train Time (s)": 340.33,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.76
+        },
+        {
+          "seed": 132,
+          "OA": 96.5178,
+          "AA": 0.9113,
+          "Kappa": 0.9502,
+          "Train Time (s)": 274.66,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.76
+        },
+        {
+          "seed": 42,
+          "OA": 98.1926,
+          "AA": 0.9657,
+          "Kappa": 0.9747,
+          "Train Time (s)": 438.77,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.76
+        },
+        {
+          "seed": 52,
+          "OA": 97.6064,
+          "AA": 0.9185,
+          "Kappa": 0.966,
+          "Train Time (s)": 444.84,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.76
+        },
+        {
+          "seed": 62,
+          "OA": 97.418,
+          "AA": 0.9283,
+          "Kappa": 0.9634,
+          "Train Time (s)": 313.22,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.76
+        },
+        {
+          "seed": 72,
+          "OA": 98.2484,
+          "AA": 0.9459,
+          "Kappa": 0.9752,
+          "Train Time (s)": 377.4,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.76
+        },
+        {
+          "seed": 82,
+          "OA": 98.4927,
+          "AA": 0.9581,
+          "Kappa": 0.9788,
+          "Train Time (s)": 268.04,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.76
+        },
+        {
+          "seed": 92,
+          "OA": 96.5108,
+          "AA": 0.9183,
+          "Kappa": 0.9501,
+          "Train Time (s)": 306.99,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.76
+        }
+      ]
+    },
+    "Indian_pines": {
+      "average": {
+        "seed": 87.0,
+        "OA": 87.9194,
+        "AA": 0.7717,
+        "Kappa": 0.8618,
+        "Train Time (s)": 90.536,
+        "FLOPs(M)": 6.27,
+        "Params(K)": 6.37
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 3.4964,
+        "AA": 0.0444,
+        "Kappa": 0.04,
+        "Train Time (s)": 21.1659,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 85.1105,
+          "AA": 0.7133,
+          "Kappa": 0.8299,
+          "Train Time (s)": 60.59,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 112,
+          "OA": 91.8075,
+          "AA": 0.8036,
+          "Kappa": 0.9063,
+          "Train Time (s)": 98.88,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 122,
+          "OA": 92.3927,
+          "AA": 0.8358,
+          "Kappa": 0.9133,
+          "Train Time (s)": 129.05,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 132,
+          "OA": 88.1664,
+          "AA": 0.835,
+          "Kappa": 0.864,
+          "Train Time (s)": 85.91,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 42,
+          "OA": 82.4447,
+          "AA": 0.7811,
+          "Kappa": 0.7994,
+          "Train Time (s)": 80.27,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 52,
+          "OA": 88.2965,
+          "AA": 0.7149,
+          "Kappa": 0.8658,
+          "Train Time (s)": 111.36,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 62,
+          "OA": 87.1261,
+          "AA": 0.7459,
+          "Kappa": 0.8535,
+          "Train Time (s)": 87.78,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 72,
+          "OA": 85.8257,
+          "AA": 0.7493,
+          "Kappa": 0.8365,
+          "Train Time (s)": 61.6,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 82,
+          "OA": 85.1756,
+          "AA": 0.7506,
+          "Kappa": 0.831,
+          "Train Time (s)": 86.66,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 92,
+          "OA": 92.8479,
+          "AA": 0.7874,
+          "Kappa": 0.9184,
+          "Train Time (s)": 103.26,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        }
+      ]
+    },
+    "chikusei": {
+      "average": {
+        "seed": 87.0,
+        "OA": 98.9278,
+        "AA": 0.9372,
+        "Kappa": 0.9877,
+        "Train Time (s)": 244.533,
+        "FLOPs(M)": 6.27,
+        "Params(K)": 6.57
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.5869,
+        "AA": 0.0243,
+        "Kappa": 0.0183,
+        "Train Time (s)": 80.3137,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.622,
+          "AA": 0.9473,
+          "Kappa": 0.9956,
+          "Train Time (s)": 242.43,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.57
+        },
+        {
+          "seed": 112,
+          "OA": 94.4325,
+          "AA": 0.8798,
+          "Kappa": 0.9359,
+          "Train Time (s)": 169.92,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.57
+        },
+        {
+          "seed": 122,
+          "OA": 99.3384,
+          "AA": 0.9271,
+          "Kappa": 0.9924,
+          "Train Time (s)": 175.77,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.57
+        },
+        {
+          "seed": 132,
+          "OA": 99.6907,
+          "AA": 0.9659,
+          "Kappa": 0.9964,
+          "Train Time (s)": 197.96,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.57
+        },
+        {
+          "seed": 42,
+          "OA": 99.5189,
+          "AA": 0.9411,
+          "Kappa": 0.9944,
+          "Train Time (s)": 396.51,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.57
+        },
+        {
+          "seed": 52,
+          "OA": 99.1752,
+          "AA": 0.9423,
+          "Kappa": 0.9905,
+          "Train Time (s)": 320.23,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.57
+        },
+        {
+          "seed": 62,
+          "OA": 99.4158,
+          "AA": 0.9251,
+          "Kappa": 0.9933,
+          "Train Time (s)": 243.64,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.57
+        },
+        {
+          "seed": 72,
+          "OA": 99.2783,
+          "AA": 0.9648,
+          "Kappa": 0.9917,
+          "Train Time (s)": 287.6,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.57
+        },
+        {
+          "seed": 82,
+          "OA": 99.4329,
+          "AA": 0.9349,
+          "Kappa": 0.9935,
+          "Train Time (s)": 282.69,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.57
+        },
+        {
+          "seed": 92,
+          "OA": 99.3728,
+          "AA": 0.9439,
+          "Kappa": 0.9928,
+          "Train Time (s)": 128.58,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.57
+        }
+      ]
+    },
+    "whu_longkou": {
+      "average": {
+        "seed": 87.0,
+        "OA": 91.7482,
+        "AA": 0.8202,
+        "Kappa": 0.8888,
+        "Train Time (s)": 242.413,
+        "FLOPs(M)": 6.27,
+        "Params(K)": 5.92
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.8872,
+        "AA": 0.043,
+        "Kappa": 0.0257,
+        "Train Time (s)": 117.065,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 91.5187,
+          "AA": 0.7885,
+          "Kappa": 0.8851,
+          "Train Time (s)": 117.14,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 112,
+          "OA": 91.3657,
+          "AA": 0.8023,
+          "Kappa": 0.884,
+          "Train Time (s)": 215.5,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 122,
+          "OA": 94.9245,
+          "AA": 0.889,
+          "Kappa": 0.932,
+          "Train Time (s)": 201.16,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 132,
+          "OA": 88.8645,
+          "AA": 0.7734,
+          "Kappa": 0.8504,
+          "Train Time (s)": 157.16,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 42,
+          "OA": 94.1595,
+          "AA": 0.8618,
+          "Kappa": 0.9216,
+          "Train Time (s)": 538.42,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 52,
+          "OA": 90.4743,
+          "AA": 0.7906,
+          "Kappa": 0.8702,
+          "Train Time (s)": 326.85,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 62,
+          "OA": 91.7049,
+          "AA": 0.7763,
+          "Kappa": 0.8868,
+          "Train Time (s)": 221.34,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 72,
+          "OA": 93.4211,
+          "AA": 0.8668,
+          "Kappa": 0.9122,
+          "Train Time (s)": 224.6,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 82,
+          "OA": 90.1949,
+          "AA": 0.7985,
+          "Kappa": 0.8662,
+          "Train Time (s)": 195.76,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        },
+        {
+          "seed": 92,
+          "OA": 90.8535,
+          "AA": 0.8546,
+          "Kappa": 0.879,
+          "Train Time (s)": 226.2,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 5.92
+        }
+      ]
+    },
+    "Botswana": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.6721,
+        "AA": 0.9975,
+        "Kappa": 0.9965,
+        "Train Time (s)": 32.556,
+        "FLOPs(M)": 6.27,
+        "Params(K)": 6.24
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.198,
+        "AA": 0.0015,
+        "Kappa": 0.0022,
+        "Train Time (s)": 15.3975,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.5902,
+          "AA": 0.997,
+          "Kappa": 0.9956,
+          "Train Time (s)": 31.92,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.24
+        },
+        {
+          "seed": 112,
+          "OA": 99.7951,
+          "AA": 0.9985,
+          "Kappa": 0.9978,
+          "Train Time (s)": 36.87,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.24
+        },
+        {
+          "seed": 122,
+          "OA": 99.7951,
+          "AA": 0.9985,
+          "Kappa": 0.9978,
+          "Train Time (s)": 28.08,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.24
+        },
+        {
+          "seed": 132,
+          "OA": 99.3852,
+          "AA": 0.9952,
+          "Kappa": 0.9933,
+          "Train Time (s)": 15.75,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.24
+        },
+        {
+          "seed": 42,
+          "OA": 99.3852,
+          "AA": 0.9952,
+          "Kappa": 0.9933,
+          "Train Time (s)": 49.73,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.24
+        },
+        {
+          "seed": 52,
+          "OA": 100.0,
+          "AA": 1.0,
+          "Kappa": 1.0,
+          "Train Time (s)": 63.13,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.24
+        },
+        {
+          "seed": 62,
+          "OA": 99.5902,
+          "AA": 0.997,
+          "Kappa": 0.9956,
+          "Train Time (s)": 20.06,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.24
+        },
+        {
+          "seed": 72,
+          "OA": 99.7951,
+          "AA": 0.9983,
+          "Kappa": 0.9978,
+          "Train Time (s)": 22.68,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.24
+        },
+        {
+          "seed": 82,
+          "OA": 99.5902,
+          "AA": 0.997,
+          "Kappa": 0.9956,
+          "Train Time (s)": 16.45,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.24
+        },
+        {
+          "seed": 92,
+          "OA": 99.7951,
+          "AA": 0.9983,
+          "Kappa": 0.9978,
+          "Train Time (s)": 40.89,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.24
+        }
+      ]
+    },
+    "Salina": {
+      "average": {
+        "seed": 87.0,
+        "OA": 97.984,
+        "AA": 0.992,
+        "Kappa": 0.9776,
+        "Train Time (s)": 324.582,
+        "FLOPs(M)": 6.27,
+        "Params(K)": 6.37
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.6379,
+        "AA": 0.0051,
+        "Kappa": 0.0181,
+        "Train Time (s)": 73.3589,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 98.6576,
+          "AA": 0.995,
+          "Kappa": 0.9851,
+          "Train Time (s)": 266.89,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 112,
+          "OA": 98.6823,
+          "AA": 0.9949,
+          "Kappa": 0.9853,
+          "Train Time (s)": 327.05,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 122,
+          "OA": 98.9286,
+          "AA": 0.9944,
+          "Kappa": 0.9881,
+          "Train Time (s)": 348.46,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 132,
+          "OA": 99.5074,
+          "AA": 0.998,
+          "Kappa": 0.9945,
+          "Train Time (s)": 498.16,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 42,
+          "OA": 98.7562,
+          "AA": 0.9939,
+          "Kappa": 0.9861,
+          "Train Time (s)": 324.32,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 52,
+          "OA": 97.7094,
+          "AA": 0.9878,
+          "Kappa": 0.9745,
+          "Train Time (s)": 243.11,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 62,
+          "OA": 97.2414,
+          "AA": 0.9911,
+          "Kappa": 0.9694,
+          "Train Time (s)": 249.65,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 72,
+          "OA": 97.6601,
+          "AA": 0.9888,
+          "Kappa": 0.9739,
+          "Train Time (s)": 363.68,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 82,
+          "OA": 93.7685,
+          "AA": 0.9805,
+          "Kappa": 0.931,
+          "Train Time (s)": 299.71,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        },
+        {
+          "seed": 92,
+          "OA": 98.9286,
+          "AA": 0.9957,
+          "Kappa": 0.9881,
+          "Train Time (s)": 324.79,
+          "FLOPs(M)": 6.27,
+          "Params(K)": 6.37
+        }
+      ]
+    }
+  },
+  "full_model": {
+    "PaviaU": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.1164,
+        "AA": 0.9863,
+        "Kappa": 0.9883,
+        "Train Time (s)": 190.289,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 5.87
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.833,
+        "AA": 0.0155,
+        "Kappa": 0.011,
+        "Train Time (s)": 44.8841,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 98.0365,
+          "AA": 0.9839,
+          "Kappa": 0.974,
+          "Train Time (s)": 134.06,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 112,
+          "OA": 99.3455,
+          "AA": 0.9857,
+          "Kappa": 0.9913,
+          "Train Time (s)": 154.28,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 122,
+          "OA": 99.5637,
+          "AA": 0.994,
+          "Kappa": 0.9942,
+          "Train Time (s)": 225.61,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 132,
+          "OA": 97.8183,
+          "AA": 0.9759,
+          "Kappa": 0.9711,
+          "Train Time (s)": 206.91,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 42,
+          "OA": 99.813,
+          "AA": 0.9979,
+          "Kappa": 0.9975,
+          "Train Time (s)": 178.33,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 52,
+          "OA": 99.7662,
+          "AA": 0.9952,
+          "Kappa": 0.9969,
+          "Train Time (s)": 192.09,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 62,
+          "OA": 99.2676,
+          "AA": 0.99,
+          "Kappa": 0.9903,
+          "Train Time (s)": 237.22,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 72,
+          "OA": 97.9741,
+          "AA": 0.9469,
+          "Kappa": 0.9731,
+          "Train Time (s)": 132.14,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 82,
+          "OA": 99.7818,
+          "AA": 0.9974,
+          "Kappa": 0.9971,
+          "Train Time (s)": 268.65,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 92,
+          "OA": 99.7974,
+          "AA": 0.9957,
+          "Kappa": 0.9973,
+          "Train Time (s)": 173.6,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        }
+      ]
+    },
+    "whu_hanchuan": {
+      "average": {
+        "seed": 87.0,
+        "OA": 93.4139,
+        "AA": 0.8354,
+        "Kappa": 0.9228,
+        "Train Time (s)": 322.622,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 6.26
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.5687,
+        "AA": 0.0047,
+        "Kappa": 0.0067,
+        "Train Time (s)": 105.2394,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 93.5743,
+          "AA": 0.836,
+          "Kappa": 0.9246,
+          "Train Time (s)": 376.23,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 112,
+          "OA": 93.795,
+          "AA": 0.8402,
+          "Kappa": 0.9273,
+          "Train Time (s)": 336.9,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 122,
+          "OA": 93.4232,
+          "AA": 0.8342,
+          "Kappa": 0.9229,
+          "Train Time (s)": 454.72,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 132,
+          "OA": 93.4232,
+          "AA": 0.8354,
+          "Kappa": 0.9229,
+          "Train Time (s)": 238.72,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 42,
+          "OA": 94.2714,
+          "AA": 0.8413,
+          "Kappa": 0.9328,
+          "Train Time (s)": 358.48,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 52,
+          "OA": 93.6091,
+          "AA": 0.8354,
+          "Kappa": 0.925,
+          "Train Time (s)": 233.62,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 62,
+          "OA": 93.307,
+          "AA": 0.8343,
+          "Kappa": 0.9216,
+          "Train Time (s)": 370.46,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 72,
+          "OA": 92.1102,
+          "AA": 0.8255,
+          "Kappa": 0.9075,
+          "Train Time (s)": 185.32,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 82,
+          "OA": 93.6556,
+          "AA": 0.8404,
+          "Kappa": 0.9256,
+          "Train Time (s)": 479.78,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 92,
+          "OA": 92.97,
+          "AA": 0.8312,
+          "Kappa": 0.9176,
+          "Train Time (s)": 191.99,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        }
+      ]
+    },
+    "whu_honghu": {
+      "average": {
+        "seed": 87.0,
+        "OA": 98.6092,
+        "AA": 0.9642,
+        "Kappa": 0.9804,
+        "Train Time (s)": 478.955,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 6.71
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.2536,
+        "AA": 0.0084,
+        "Kappa": 0.0036,
+        "Train Time (s)": 118.6568,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 98.7369,
+          "AA": 0.9738,
+          "Kappa": 0.9822,
+          "Train Time (s)": 367.99,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 112,
+          "OA": 98.2205,
+          "AA": 0.9592,
+          "Kappa": 0.9749,
+          "Train Time (s)": 488.99,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 122,
+          "OA": 98.4368,
+          "AA": 0.9577,
+          "Kappa": 0.978,
+          "Train Time (s)": 431.0,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 132,
+          "OA": 98.716,
+          "AA": 0.964,
+          "Kappa": 0.9819,
+          "Train Time (s)": 290.54,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 42,
+          "OA": 98.7927,
+          "AA": 0.9669,
+          "Kappa": 0.9829,
+          "Train Time (s)": 622.54,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 52,
+          "OA": 98.7648,
+          "AA": 0.9524,
+          "Kappa": 0.9826,
+          "Train Time (s)": 655.09,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 62,
+          "OA": 98.4927,
+          "AA": 0.9549,
+          "Kappa": 0.9787,
+          "Train Time (s)": 385.7,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 72,
+          "OA": 98.6253,
+          "AA": 0.9712,
+          "Kappa": 0.9806,
+          "Train Time (s)": 426.2,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 82,
+          "OA": 99.037,
+          "AA": 0.9779,
+          "Kappa": 0.9864,
+          "Train Time (s)": 561.24,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 92,
+          "OA": 98.2694,
+          "AA": 0.9644,
+          "Kappa": 0.9755,
+          "Train Time (s)": 560.26,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        }
+      ]
+    },
+    "Indian_pines": {
+      "average": {
+        "seed": 87.0,
+        "OA": 96.5085,
+        "AA": 0.9679,
+        "Kappa": 0.9602,
+        "Train Time (s)": 100.178,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 6.32
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.9788,
+        "AA": 0.0215,
+        "Kappa": 0.0226,
+        "Train Time (s)": 24.1558,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 95.2536,
+          "AA": 0.9416,
+          "Kappa": 0.9458,
+          "Train Time (s)": 127.11,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 112,
+          "OA": 98.8947,
+          "AA": 0.9927,
+          "Kappa": 0.9874,
+          "Train Time (s)": 100.68,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 122,
+          "OA": 97.8544,
+          "AA": 0.9859,
+          "Kappa": 0.9755,
+          "Train Time (s)": 68.9,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 132,
+          "OA": 97.9194,
+          "AA": 0.9843,
+          "Kappa": 0.9763,
+          "Train Time (s)": 103.83,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 42,
+          "OA": 94.4083,
+          "AA": 0.9446,
+          "Kappa": 0.9363,
+          "Train Time (s)": 52.27,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 52,
+          "OA": 97.5943,
+          "AA": 0.9818,
+          "Kappa": 0.9725,
+          "Train Time (s)": 105.18,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 62,
+          "OA": 97.2692,
+          "AA": 0.9837,
+          "Kappa": 0.9689,
+          "Train Time (s)": 90.65,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 72,
+          "OA": 95.5137,
+          "AA": 0.9662,
+          "Kappa": 0.9488,
+          "Train Time (s)": 128.88,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 82,
+          "OA": 92.5878,
+          "AA": 0.9323,
+          "Kappa": 0.9154,
+          "Train Time (s)": 109.56,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 92,
+          "OA": 97.7893,
+          "AA": 0.9664,
+          "Kappa": 0.9748,
+          "Train Time (s)": 114.72,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        }
+      ]
+    },
+    "chikusei": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.7113,
+        "AA": 0.9782,
+        "Kappa": 0.9967,
+        "Train Time (s)": 263.323,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 6.52
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.2974,
+        "AA": 0.0229,
+        "Kappa": 0.0034,
+        "Train Time (s)": 87.2965,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.8453,
+          "AA": 0.9893,
+          "Kappa": 0.9982,
+          "Train Time (s)": 225.2,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 112,
+          "OA": 99.957,
+          "AA": 0.9969,
+          "Kappa": 0.9995,
+          "Train Time (s)": 267.83,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 122,
+          "OA": 99.768,
+          "AA": 0.9952,
+          "Kappa": 0.9973,
+          "Train Time (s)": 240.67,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 132,
+          "OA": 99.3814,
+          "AA": 0.95,
+          "Kappa": 0.9929,
+          "Train Time (s)": 134.25,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 42,
+          "OA": 99.622,
+          "AA": 0.958,
+          "Kappa": 0.9956,
+          "Train Time (s)": 196.91,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 52,
+          "OA": 99.8539,
+          "AA": 0.9896,
+          "Kappa": 0.9983,
+          "Train Time (s)": 248.73,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 62,
+          "OA": 99.8797,
+          "AA": 0.9903,
+          "Kappa": 0.9986,
+          "Train Time (s)": 328.28,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 72,
+          "OA": 99.0205,
+          "AA": 0.9332,
+          "Kappa": 0.9887,
+          "Train Time (s)": 256.49,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 82,
+          "OA": 99.8368,
+          "AA": 0.9805,
+          "Kappa": 0.9981,
+          "Train Time (s)": 465.85,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 92,
+          "OA": 99.9484,
+          "AA": 0.9993,
+          "Kappa": 0.9994,
+          "Train Time (s)": 269.02,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        }
+      ]
+    },
+    "whu_longkou": {
+      "average": {
+        "seed": 87.0,
+        "OA": 94.1422,
+        "AA": 0.8653,
+        "Kappa": 0.9211,
+        "Train Time (s)": 398.246,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 5.87
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.9985,
+        "AA": 0.04,
+        "Kappa": 0.0139,
+        "Train Time (s)": 156.207,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 93.6673,
+          "AA": 0.845,
+          "Kappa": 0.9146,
+          "Train Time (s)": 392.07,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 112,
+          "OA": 94.3192,
+          "AA": 0.9108,
+          "Kappa": 0.9248,
+          "Train Time (s)": 296.05,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 122,
+          "OA": 92.1706,
+          "AA": 0.8011,
+          "Kappa": 0.8936,
+          "Train Time (s)": 229.91,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 132,
+          "OA": 95.317,
+          "AA": 0.906,
+          "Kappa": 0.9374,
+          "Train Time (s)": 203.68,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 42,
+          "OA": 95.5697,
+          "AA": 0.8991,
+          "Kappa": 0.9405,
+          "Train Time (s)": 629.18,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 52,
+          "OA": 93.7005,
+          "AA": 0.8928,
+          "Kappa": 0.9162,
+          "Train Time (s)": 526.74,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 62,
+          "OA": 93.5076,
+          "AA": 0.8347,
+          "Kappa": 0.9119,
+          "Train Time (s)": 653.54,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 72,
+          "OA": 95.0243,
+          "AA": 0.8992,
+          "Kappa": 0.9335,
+          "Train Time (s)": 351.79,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 82,
+          "OA": 93.96,
+          "AA": 0.8321,
+          "Kappa": 0.9179,
+          "Train Time (s)": 326.81,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 92,
+          "OA": 94.1861,
+          "AA": 0.8323,
+          "Kappa": 0.921,
+          "Train Time (s)": 372.69,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        }
+      ]
+    },
+    "Botswana": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.6721,
+        "AA": 0.9974,
+        "Kappa": 0.9965,
+        "Train Time (s)": 21.212,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 6.19
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.293,
+        "AA": 0.0022,
+        "Kappa": 0.0032,
+        "Train Time (s)": 5.3248,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.1803,
+          "AA": 0.9939,
+          "Kappa": 0.9911,
+          "Train Time (s)": 22.01,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 112,
+          "OA": 99.7951,
+          "AA": 0.9985,
+          "Kappa": 0.9978,
+          "Train Time (s)": 28.67,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 122,
+          "OA": 100.0,
+          "AA": 1.0,
+          "Kappa": 1.0,
+          "Train Time (s)": 22.36,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 132,
+          "OA": 99.7951,
+          "AA": 0.9974,
+          "Kappa": 0.9978,
+          "Train Time (s)": 22.05,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 42,
+          "OA": 99.5902,
+          "AA": 0.9964,
+          "Kappa": 0.9956,
+          "Train Time (s)": 31.45,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 52,
+          "OA": 99.7951,
+          "AA": 0.9985,
+          "Kappa": 0.9978,
+          "Train Time (s)": 16.81,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 62,
+          "OA": 100.0,
+          "AA": 1.0,
+          "Kappa": 1.0,
+          "Train Time (s)": 16.85,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 72,
+          "OA": 99.7951,
+          "AA": 0.9985,
+          "Kappa": 0.9978,
+          "Train Time (s)": 16.9,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 82,
+          "OA": 99.1803,
+          "AA": 0.9939,
+          "Kappa": 0.9911,
+          "Train Time (s)": 19.47,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 92,
+          "OA": 99.5902,
+          "AA": 0.9964,
+          "Kappa": 0.9956,
+          "Train Time (s)": 15.55,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        }
+      ]
+    },
+    "Salina": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.3978,
+        "AA": 0.997,
+        "Kappa": 0.9933,
+        "Train Time (s)": 309.569,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 6.32
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.5052,
+        "AA": 0.0022,
+        "Kappa": 0.0056,
+        "Train Time (s)": 99.7872,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.5936,
+          "AA": 0.9982,
+          "Kappa": 0.9955,
+          "Train Time (s)": 395.42,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 112,
+          "OA": 98.9409,
+          "AA": 0.9939,
+          "Kappa": 0.9882,
+          "Train Time (s)": 230.6,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 122,
+          "OA": 99.4828,
+          "AA": 0.9973,
+          "Kappa": 0.9942,
+          "Train Time (s)": 190.04,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 132,
+          "OA": 99.8276,
+          "AA": 0.9988,
+          "Kappa": 0.9981,
+          "Train Time (s)": 320.47,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 42,
+          "OA": 99.3842,
+          "AA": 0.9976,
+          "Kappa": 0.9931,
+          "Train Time (s)": 352.78,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 52,
+          "OA": 99.7167,
+          "AA": 0.998,
+          "Kappa": 0.9968,
+          "Train Time (s)": 350.88,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 62,
+          "OA": 98.1773,
+          "AA": 0.9927,
+          "Kappa": 0.9797,
+          "Train Time (s)": 183.05,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 72,
+          "OA": 99.335,
+          "AA": 0.9957,
+          "Kappa": 0.9926,
+          "Train Time (s)": 262.73,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 82,
+          "OA": 99.7537,
+          "AA": 0.9986,
+          "Kappa": 0.9973,
+          "Train Time (s)": 508.95,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 92,
+          "OA": 99.766,
+          "AA": 0.9988,
+          "Kappa": 0.9974,
+          "Train Time (s)": 300.77,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        }
+      ]
+    }
+  },
+  "wo_Dropout": {
+    "PaviaU": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.7553,
+        "AA": 0.9959,
+        "Kappa": 0.9968,
+        "Train Time (s)": 194.53,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 5.87
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.1316,
+        "AA": 0.003,
+        "Kappa": 0.0018,
+        "Train Time (s)": 72.9839,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.5637,
+          "AA": 0.99,
+          "Kappa": 0.9942,
+          "Train Time (s)": 150.56,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 112,
+          "OA": 99.9065,
+          "AA": 0.9985,
+          "Kappa": 0.9988,
+          "Train Time (s)": 223.93,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 122,
+          "OA": 99.6883,
+          "AA": 0.9962,
+          "Kappa": 0.9959,
+          "Train Time (s)": 147.71,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 132,
+          "OA": 99.7974,
+          "AA": 0.9977,
+          "Kappa": 0.9973,
+          "Train Time (s)": 118.72,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 42,
+          "OA": 99.6416,
+          "AA": 0.9939,
+          "Kappa": 0.9953,
+          "Train Time (s)": 284.02,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 52,
+          "OA": 99.9221,
+          "AA": 0.9983,
+          "Kappa": 0.999,
+          "Train Time (s)": 331.57,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 62,
+          "OA": 99.7662,
+          "AA": 0.9977,
+          "Kappa": 0.9969,
+          "Train Time (s)": 248.5,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 72,
+          "OA": 99.6104,
+          "AA": 0.9916,
+          "Kappa": 0.9948,
+          "Train Time (s)": 126.04,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 82,
+          "OA": 99.7351,
+          "AA": 0.9966,
+          "Kappa": 0.9965,
+          "Train Time (s)": 159.63,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 92,
+          "OA": 99.9221,
+          "AA": 0.9981,
+          "Kappa": 0.999,
+          "Train Time (s)": 154.62,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        }
+      ]
+    },
+    "whu_hanchuan": {
+      "average": {
+        "seed": 87.0,
+        "OA": 93.3372,
+        "AA": 0.8562,
+        "Kappa": 0.9216,
+        "Train Time (s)": 271.827,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 6.26
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.1506,
+        "AA": 0.0513,
+        "Kappa": 0.0138,
+        "Train Time (s)": 96.8935,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 94.1088,
+          "AA": 0.8294,
+          "Kappa": 0.9307,
+          "Train Time (s)": 138.63,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 112,
+          "OA": 93.9926,
+          "AA": 0.9264,
+          "Kappa": 0.9297,
+          "Train Time (s)": 250.77,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 122,
+          "OA": 92.7725,
+          "AA": 0.8172,
+          "Kappa": 0.9149,
+          "Train Time (s)": 341.33,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 132,
+          "OA": 92.4936,
+          "AA": 0.8075,
+          "Kappa": 0.9116,
+          "Train Time (s)": 192.34,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 42,
+          "OA": 94.5619,
+          "AA": 0.8473,
+          "Kappa": 0.9363,
+          "Train Time (s)": 338.8,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 52,
+          "OA": 93.4464,
+          "AA": 0.8117,
+          "Kappa": 0.9227,
+          "Train Time (s)": 220.34,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 62,
+          "OA": 93.4,
+          "AA": 0.8785,
+          "Kappa": 0.9224,
+          "Train Time (s)": 343.46,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 72,
+          "OA": 94.5503,
+          "AA": 0.9216,
+          "Kappa": 0.936,
+          "Train Time (s)": 448.69,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 82,
+          "OA": 93.3302,
+          "AA": 0.9216,
+          "Kappa": 0.9219,
+          "Train Time (s)": 279.57,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        },
+        {
+          "seed": 92,
+          "OA": 90.7158,
+          "AA": 0.801,
+          "Kappa": 0.8901,
+          "Train Time (s)": 164.34,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.26
+        }
+      ]
+    },
+    "whu_honghu": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.0872,
+        "AA": 0.9777,
+        "Kappa": 0.9871,
+        "Train Time (s)": 382.025,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 6.71
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.3155,
+        "AA": 0.0143,
+        "Kappa": 0.0045,
+        "Train Time (s)": 78.5683,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.1556,
+          "AA": 0.9852,
+          "Kappa": 0.9881,
+          "Train Time (s)": 370.51,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 112,
+          "OA": 98.8625,
+          "AA": 0.9526,
+          "Kappa": 0.984,
+          "Train Time (s)": 322.12,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 122,
+          "OA": 99.2254,
+          "AA": 0.9807,
+          "Kappa": 0.9891,
+          "Train Time (s)": 383.31,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 132,
+          "OA": 98.9812,
+          "AA": 0.9853,
+          "Kappa": 0.9856,
+          "Train Time (s)": 263.24,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 42,
+          "OA": 99.1766,
+          "AA": 0.982,
+          "Kappa": 0.9884,
+          "Train Time (s)": 515.94,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 52,
+          "OA": 99.3719,
+          "AA": 0.9803,
+          "Kappa": 0.9912,
+          "Train Time (s)": 470.34,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 62,
+          "OA": 99.5604,
+          "AA": 0.9953,
+          "Kappa": 0.9938,
+          "Train Time (s)": 462.9,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 72,
+          "OA": 99.2324,
+          "AA": 0.9815,
+          "Kappa": 0.9892,
+          "Train Time (s)": 364.57,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 82,
+          "OA": 98.8765,
+          "AA": 0.983,
+          "Kappa": 0.9842,
+          "Train Time (s)": 348.95,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        },
+        {
+          "seed": 92,
+          "OA": 98.4299,
+          "AA": 0.9512,
+          "Kappa": 0.9778,
+          "Train Time (s)": 318.37,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.71
+        }
+      ]
+    },
+    "Indian_pines": {
+      "average": {
+        "seed": 87.0,
+        "OA": 96.5344,
+        "AA": 0.9688,
+        "Kappa": 0.9605,
+        "Train Time (s)": 82.653,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 6.32
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.3908,
+        "AA": 0.0153,
+        "Kappa": 0.0158,
+        "Train Time (s)": 15.759,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 93.7581,
+          "AA": 0.9618,
+          "Kappa": 0.9289,
+          "Train Time (s)": 67.81,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 112,
+          "OA": 96.1638,
+          "AA": 0.9436,
+          "Kappa": 0.9562,
+          "Train Time (s)": 72.43,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 122,
+          "OA": 97.6593,
+          "AA": 0.9819,
+          "Kappa": 0.9733,
+          "Train Time (s)": 71.75,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 132,
+          "OA": 98.8296,
+          "AA": 0.992,
+          "Kappa": 0.9867,
+          "Train Time (s)": 104.4,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 42,
+          "OA": 97.6593,
+          "AA": 0.9834,
+          "Kappa": 0.9733,
+          "Train Time (s)": 94.94,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 52,
+          "OA": 95.3186,
+          "AA": 0.9605,
+          "Kappa": 0.9467,
+          "Train Time (s)": 103.9,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 62,
+          "OA": 96.814,
+          "AA": 0.9618,
+          "Kappa": 0.9637,
+          "Train Time (s)": 90.78,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 72,
+          "OA": 96.2289,
+          "AA": 0.9709,
+          "Kappa": 0.9569,
+          "Train Time (s)": 69.92,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 82,
+          "OA": 96.2289,
+          "AA": 0.9793,
+          "Kappa": 0.9571,
+          "Train Time (s)": 89.08,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 92,
+          "OA": 96.684,
+          "AA": 0.9527,
+          "Kappa": 0.9622,
+          "Train Time (s)": 61.52,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        }
+      ]
+    },
+    "chikusei": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.6056,
+        "AA": 0.9777,
+        "Kappa": 0.9954,
+        "Train Time (s)": 189.218,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 6.52
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.292,
+        "AA": 0.0135,
+        "Kappa": 0.0034,
+        "Train Time (s)": 77.4391,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.5962,
+          "AA": 0.9912,
+          "Kappa": 0.9953,
+          "Train Time (s)": 282.11,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 112,
+          "OA": 99.8368,
+          "AA": 0.9869,
+          "Kappa": 0.9981,
+          "Train Time (s)": 103.12,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 122,
+          "OA": 99.768,
+          "AA": 0.994,
+          "Kappa": 0.9973,
+          "Train Time (s)": 130.84,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 132,
+          "OA": 99.5962,
+          "AA": 0.975,
+          "Kappa": 0.9953,
+          "Train Time (s)": 119.52,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 42,
+          "OA": 99.5189,
+          "AA": 0.9604,
+          "Kappa": 0.9944,
+          "Train Time (s)": 238.35,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 52,
+          "OA": 99.8453,
+          "AA": 0.9848,
+          "Kappa": 0.9982,
+          "Train Time (s)": 206.39,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 62,
+          "OA": 98.8573,
+          "AA": 0.9739,
+          "Kappa": 0.9868,
+          "Train Time (s)": 281.21,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 72,
+          "OA": 99.8539,
+          "AA": 0.9856,
+          "Kappa": 0.9983,
+          "Train Time (s)": 286.51,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 82,
+          "OA": 99.579,
+          "AA": 0.952,
+          "Kappa": 0.9951,
+          "Train Time (s)": 124.02,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        },
+        {
+          "seed": 92,
+          "OA": 99.6048,
+          "AA": 0.9728,
+          "Kappa": 0.9954,
+          "Train Time (s)": 120.11,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.52
+        }
+      ]
+    },
+    "whu_longkou": {
+      "average": {
+        "seed": 87.0,
+        "OA": 96.4777,
+        "AA": 0.9256,
+        "Kappa": 0.9529,
+        "Train Time (s)": 413.942,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 5.87
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.7632,
+        "AA": 0.0156,
+        "Kappa": 0.0101,
+        "Train Time (s)": 157.494,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 96.8868,
+          "AA": 0.9171,
+          "Kappa": 0.9582,
+          "Train Time (s)": 390.5,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 112,
+          "OA": 97.6984,
+          "AA": 0.9524,
+          "Kappa": 0.9692,
+          "Train Time (s)": 304.46,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 122,
+          "OA": 97.0798,
+          "AA": 0.9368,
+          "Kappa": 0.9609,
+          "Train Time (s)": 357.56,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 132,
+          "OA": 96.6806,
+          "AA": 0.9371,
+          "Kappa": 0.9558,
+          "Train Time (s)": 227.15,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 42,
+          "OA": 95.6562,
+          "AA": 0.9159,
+          "Kappa": 0.9422,
+          "Train Time (s)": 700.39,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 52,
+          "OA": 96.1152,
+          "AA": 0.8996,
+          "Kappa": 0.9478,
+          "Train Time (s)": 649.91,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 62,
+          "OA": 95.9822,
+          "AA": 0.9273,
+          "Kappa": 0.9465,
+          "Train Time (s)": 447.42,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 72,
+          "OA": 95.5298,
+          "AA": 0.912,
+          "Kappa": 0.9403,
+          "Train Time (s)": 324.61,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 82,
+          "OA": 97.3525,
+          "AA": 0.938,
+          "Kappa": 0.9646,
+          "Train Time (s)": 472.89,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        },
+        {
+          "seed": 92,
+          "OA": 95.7959,
+          "AA": 0.92,
+          "Kappa": 0.9439,
+          "Train Time (s)": 264.53,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 5.87
+        }
+      ]
+    },
+    "Botswana": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.6312,
+        "AA": 0.9966,
+        "Kappa": 0.996,
+        "Train Time (s)": 24.466,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 6.19
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.3024,
+        "AA": 0.0033,
+        "Kappa": 0.0033,
+        "Train Time (s)": 9.0802,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.3852,
+          "AA": 0.992,
+          "Kappa": 0.9933,
+          "Train Time (s)": 19.19,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 112,
+          "OA": 99.7951,
+          "AA": 0.9985,
+          "Kappa": 0.9978,
+          "Train Time (s)": 40.84,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 122,
+          "OA": 98.9754,
+          "AA": 0.99,
+          "Kappa": 0.9889,
+          "Train Time (s)": 16.63,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 132,
+          "OA": 100.0,
+          "AA": 1.0,
+          "Kappa": 1.0,
+          "Train Time (s)": 33.54,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 42,
+          "OA": 99.5902,
+          "AA": 0.997,
+          "Kappa": 0.9956,
+          "Train Time (s)": 17.66,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 52,
+          "OA": 99.5902,
+          "AA": 0.9967,
+          "Kappa": 0.9956,
+          "Train Time (s)": 11.73,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 62,
+          "OA": 99.7951,
+          "AA": 0.9985,
+          "Kappa": 0.9978,
+          "Train Time (s)": 24.29,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 72,
+          "OA": 100.0,
+          "AA": 1.0,
+          "Kappa": 1.0,
+          "Train Time (s)": 33.99,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 82,
+          "OA": 99.5902,
+          "AA": 0.9965,
+          "Kappa": 0.9956,
+          "Train Time (s)": 24.03,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        },
+        {
+          "seed": 92,
+          "OA": 99.5902,
+          "AA": 0.997,
+          "Kappa": 0.9956,
+          "Train Time (s)": 22.76,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.19
+        }
+      ]
+    },
+    "Salina": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.6774,
+        "AA": 0.9978,
+        "Kappa": 0.9964,
+        "Train Time (s)": 268.291,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 6.32
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.248,
+        "AA": 0.0016,
+        "Kappa": 0.0028,
+        "Train Time (s)": 77.302,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.569,
+          "AA": 0.9953,
+          "Kappa": 0.9952,
+          "Train Time (s)": 250.7,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 112,
+          "OA": 99.9015,
+          "AA": 0.9996,
+          "Kappa": 0.9989,
+          "Train Time (s)": 231.41,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 122,
+          "OA": 99.1626,
+          "AA": 0.9955,
+          "Kappa": 0.9907,
+          "Train Time (s)": 197.13,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 132,
+          "OA": 99.8153,
+          "AA": 0.9983,
+          "Kappa": 0.9979,
+          "Train Time (s)": 251.96,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 42,
+          "OA": 99.9384,
+          "AA": 0.9991,
+          "Kappa": 0.9993,
+          "Train Time (s)": 366.55,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 52,
+          "OA": 99.9015,
+          "AA": 0.9995,
+          "Kappa": 0.9989,
+          "Train Time (s)": 427.62,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 62,
+          "OA": 99.4458,
+          "AA": 0.9967,
+          "Kappa": 0.9938,
+          "Train Time (s)": 179.95,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 72,
+          "OA": 99.8276,
+          "AA": 0.999,
+          "Kappa": 0.9981,
+          "Train Time (s)": 294.43,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 82,
+          "OA": 99.569,
+          "AA": 0.9978,
+          "Kappa": 0.9952,
+          "Train Time (s)": 271.79,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        },
+        {
+          "seed": 92,
+          "OA": 99.6429,
+          "AA": 0.9976,
+          "Kappa": 0.996,
+          "Train Time (s)": 211.37,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 6.32
+        }
+      ]
+    }
+  },
+  "wo_Conv2": {
+    "PaviaU": {
+      "average": {
+        "seed": 87.0,
+        "OA": 97.0313,
+        "AA": 0.9562,
+        "Kappa": 0.9607,
+        "Train Time (s)": 168.513,
+        "FLOPs(M)": 1.02,
+        "Params(K)": 1.89
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.0816,
+        "AA": 0.0178,
+        "Kappa": 0.0144,
+        "Train Time (s)": 37.0172,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 98.3014,
+          "AA": 0.9705,
+          "Kappa": 0.9775,
+          "Train Time (s)": 219.91,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 112,
+          "OA": 97.5378,
+          "AA": 0.9566,
+          "Kappa": 0.9674,
+          "Train Time (s)": 139.52,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 122,
+          "OA": 97.491,
+          "AA": 0.9639,
+          "Kappa": 0.9667,
+          "Train Time (s)": 145.6,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 132,
+          "OA": 96.2132,
+          "AA": 0.945,
+          "Kappa": 0.9496,
+          "Train Time (s)": 128.9,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 42,
+          "OA": 95.4496,
+          "AA": 0.9416,
+          "Kappa": 0.9397,
+          "Train Time (s)": 131.96,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 52,
+          "OA": 95.2626,
+          "AA": 0.9148,
+          "Kappa": 0.9372,
+          "Train Time (s)": 160.43,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 62,
+          "OA": 97.756,
+          "AA": 0.9703,
+          "Kappa": 0.9702,
+          "Train Time (s)": 175.87,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 72,
+          "OA": 97.2261,
+          "AA": 0.9625,
+          "Kappa": 0.9633,
+          "Train Time (s)": 147.46,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 82,
+          "OA": 98.2702,
+          "AA": 0.9709,
+          "Kappa": 0.9771,
+          "Train Time (s)": 215.44,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 92,
+          "OA": 96.8054,
+          "AA": 0.9655,
+          "Kappa": 0.9579,
+          "Train Time (s)": 220.04,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        }
+      ]
+    },
+    "whu_hanchuan": {
+      "average": {
+        "seed": 87.0,
+        "OA": 89.3993,
+        "AA": 0.7991,
+        "Kappa": 0.8757,
+        "Train Time (s)": 284.091,
+        "FLOPs(M)": 1.02,
+        "Params(K)": 2.27
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.9299,
+        "AA": 0.0095,
+        "Kappa": 0.0109,
+        "Train Time (s)": 28.6887,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 90.2394,
+          "AA": 0.8043,
+          "Kappa": 0.8855,
+          "Train Time (s)": 281.6,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.27
+        },
+        {
+          "seed": 112,
+          "OA": 89.5073,
+          "AA": 0.8021,
+          "Kappa": 0.877,
+          "Train Time (s)": 254.28,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.27
+        },
+        {
+          "seed": 122,
+          "OA": 88.4848,
+          "AA": 0.7958,
+          "Kappa": 0.8651,
+          "Train Time (s)": 264.4,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.27
+        },
+        {
+          "seed": 132,
+          "OA": 89.7513,
+          "AA": 0.8061,
+          "Kappa": 0.8798,
+          "Train Time (s)": 251.43,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.27
+        },
+        {
+          "seed": 42,
+          "OA": 89.8792,
+          "AA": 0.8072,
+          "Kappa": 0.8815,
+          "Train Time (s)": 309.04,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.27
+        },
+        {
+          "seed": 52,
+          "OA": 87.2182,
+          "AA": 0.776,
+          "Kappa": 0.8499,
+          "Train Time (s)": 264.75,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.27
+        },
+        {
+          "seed": 62,
+          "OA": 90.402,
+          "AA": 0.806,
+          "Kappa": 0.8874,
+          "Train Time (s)": 281.21,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.27
+        },
+        {
+          "seed": 72,
+          "OA": 89.2749,
+          "AA": 0.7983,
+          "Kappa": 0.8742,
+          "Train Time (s)": 276.84,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.27
+        },
+        {
+          "seed": 82,
+          "OA": 89.6468,
+          "AA": 0.7924,
+          "Kappa": 0.8784,
+          "Train Time (s)": 332.16,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.27
+        },
+        {
+          "seed": 92,
+          "OA": 89.5887,
+          "AA": 0.8031,
+          "Kappa": 0.8779,
+          "Train Time (s)": 325.2,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.27
+        }
+      ]
+    },
+    "whu_honghu": {
+      "average": {
+        "seed": 87.0,
+        "OA": 94.9714,
+        "AA": 0.908,
+        "Kappa": 0.9284,
+        "Train Time (s)": 360.636,
+        "FLOPs(M)": 1.03,
+        "Params(K)": 2.73
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.2388,
+        "AA": 0.0217,
+        "Kappa": 0.018,
+        "Train Time (s)": 38.8356,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 95.8688,
+          "AA": 0.9295,
+          "Kappa": 0.9412,
+          "Train Time (s)": 377.3,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.73
+        },
+        {
+          "seed": 112,
+          "OA": 93.8311,
+          "AA": 0.8888,
+          "Kappa": 0.9117,
+          "Train Time (s)": 286.62,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.73
+        },
+        {
+          "seed": 122,
+          "OA": 93.8311,
+          "AA": 0.8951,
+          "Kappa": 0.9124,
+          "Train Time (s)": 327.29,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.73
+        },
+        {
+          "seed": 132,
+          "OA": 96.5527,
+          "AA": 0.927,
+          "Kappa": 0.9513,
+          "Train Time (s)": 376.81,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.73
+        },
+        {
+          "seed": 42,
+          "OA": 93.3287,
+          "AA": 0.8744,
+          "Kappa": 0.9038,
+          "Train Time (s)": 428.28,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.73
+        },
+        {
+          "seed": 52,
+          "OA": 93.545,
+          "AA": 0.8951,
+          "Kappa": 0.9081,
+          "Train Time (s)": 332.62,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.73
+        },
+        {
+          "seed": 62,
+          "OA": 95.6315,
+          "AA": 0.9112,
+          "Kappa": 0.9377,
+          "Train Time (s)": 393.01,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.73
+        },
+        {
+          "seed": 72,
+          "OA": 94.9407,
+          "AA": 0.8987,
+          "Kappa": 0.9281,
+          "Train Time (s)": 364.94,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.73
+        },
+        {
+          "seed": 82,
+          "OA": 96.4271,
+          "AA": 0.9457,
+          "Kappa": 0.9496,
+          "Train Time (s)": 356.97,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.73
+        },
+        {
+          "seed": 92,
+          "OA": 95.7572,
+          "AA": 0.915,
+          "Kappa": 0.9398,
+          "Train Time (s)": 362.52,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.73
+        }
+      ]
+    },
+    "Indian_pines": {
+      "average": {
+        "seed": 87.0,
+        "OA": 77.4187,
+        "AA": 0.7312,
+        "Kappa": 0.7402,
+        "Train Time (s)": 80.515,
+        "FLOPs(M)": 1.02,
+        "Params(K)": 2.34
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 3.8889,
+        "AA": 0.0555,
+        "Kappa": 0.0459,
+        "Train Time (s)": 20.5387,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 84.0052,
+          "AA": 0.8102,
+          "Kappa": 0.8172,
+          "Train Time (s)": 113.19,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 112,
+          "OA": 79.7139,
+          "AA": 0.7799,
+          "Kappa": 0.7668,
+          "Train Time (s)": 64.34,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 122,
+          "OA": 76.8531,
+          "AA": 0.704,
+          "Kappa": 0.7332,
+          "Train Time (s)": 80.13,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 132,
+          "OA": 76.658,
+          "AA": 0.6869,
+          "Kappa": 0.734,
+          "Train Time (s)": 84.18,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 42,
+          "OA": 69.5059,
+          "AA": 0.6217,
+          "Kappa": 0.6465,
+          "Train Time (s)": 109.21,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 52,
+          "OA": 76.9831,
+          "AA": 0.735,
+          "Kappa": 0.7381,
+          "Train Time (s)": 88.92,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 62,
+          "OA": 78.2185,
+          "AA": 0.7506,
+          "Kappa": 0.7488,
+          "Train Time (s)": 85.8,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 72,
+          "OA": 76.3979,
+          "AA": 0.6926,
+          "Kappa": 0.7272,
+          "Train Time (s)": 71.43,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 82,
+          "OA": 74.6424,
+          "AA": 0.7556,
+          "Kappa": 0.7057,
+          "Train Time (s)": 49.48,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 92,
+          "OA": 81.2094,
+          "AA": 0.7755,
+          "Kappa": 0.7847,
+          "Train Time (s)": 58.47,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        }
+      ]
+    },
+    "chikusei": {
+      "average": {
+        "seed": 87.0,
+        "OA": 98.1141,
+        "AA": 0.8892,
+        "Kappa": 0.9782,
+        "Train Time (s)": 192.288,
+        "FLOPs(M)": 1.03,
+        "Params(K)": 2.54
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.289,
+        "AA": 0.0441,
+        "Kappa": 0.0149,
+        "Train Time (s)": 55.9169,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 96.2883,
+          "AA": 0.8464,
+          "Kappa": 0.9572,
+          "Train Time (s)": 96.16,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.54
+        },
+        {
+          "seed": 112,
+          "OA": 98.9002,
+          "AA": 0.9275,
+          "Kappa": 0.9873,
+          "Train Time (s)": 213.18,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.54
+        },
+        {
+          "seed": 122,
+          "OA": 95.4721,
+          "AA": 0.7931,
+          "Kappa": 0.9477,
+          "Train Time (s)": 113.8,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.54
+        },
+        {
+          "seed": 132,
+          "OA": 98.9948,
+          "AA": 0.8987,
+          "Kappa": 0.9884,
+          "Train Time (s)": 249.01,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.54
+        },
+        {
+          "seed": 42,
+          "OA": 98.8315,
+          "AA": 0.8862,
+          "Kappa": 0.9865,
+          "Train Time (s)": 185.24,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.54
+        },
+        {
+          "seed": 52,
+          "OA": 98.9432,
+          "AA": 0.9029,
+          "Kappa": 0.9878,
+          "Train Time (s)": 266.51,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.54
+        },
+        {
+          "seed": 62,
+          "OA": 97.6888,
+          "AA": 0.9399,
+          "Kappa": 0.9733,
+          "Train Time (s)": 211.44,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.54
+        },
+        {
+          "seed": 72,
+          "OA": 97.9809,
+          "AA": 0.8669,
+          "Kappa": 0.9767,
+          "Train Time (s)": 240.45,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.54
+        },
+        {
+          "seed": 82,
+          "OA": 98.7026,
+          "AA": 0.9035,
+          "Kappa": 0.985,
+          "Train Time (s)": 165.24,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.54
+        },
+        {
+          "seed": 92,
+          "OA": 99.3384,
+          "AA": 0.9272,
+          "Kappa": 0.9924,
+          "Train Time (s)": 181.85,
+          "FLOPs(M)": 1.03,
+          "Params(K)": 2.54
+        }
+      ]
+    },
+    "whu_longkou": {
+      "average": {
+        "seed": 87.0,
+        "OA": 91.0936,
+        "AA": 0.7733,
+        "Kappa": 0.8789,
+        "Train Time (s)": 341.69,
+        "FLOPs(M)": 1.02,
+        "Params(K)": 1.89
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.8256,
+        "AA": 0.0307,
+        "Kappa": 0.0117,
+        "Train Time (s)": 99.7927,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 90.6007,
+          "AA": 0.7641,
+          "Kappa": 0.8722,
+          "Train Time (s)": 338.48,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 112,
+          "OA": 92.2371,
+          "AA": 0.8279,
+          "Kappa": 0.8957,
+          "Train Time (s)": 202.88,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 122,
+          "OA": 90.135,
+          "AA": 0.7541,
+          "Kappa": 0.8665,
+          "Train Time (s)": 222.93,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 132,
+          "OA": 92.2504,
+          "AA": 0.8051,
+          "Kappa": 0.8949,
+          "Train Time (s)": 218.74,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 42,
+          "OA": 90.3013,
+          "AA": 0.7492,
+          "Kappa": 0.8672,
+          "Train Time (s)": 427.54,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 52,
+          "OA": 91.1195,
+          "AA": 0.7529,
+          "Kappa": 0.8786,
+          "Train Time (s)": 505.72,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 62,
+          "OA": 91.7914,
+          "AA": 0.813,
+          "Kappa": 0.8894,
+          "Train Time (s)": 407.91,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 72,
+          "OA": 90.8934,
+          "AA": 0.7613,
+          "Kappa": 0.8761,
+          "Train Time (s)": 374.76,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 82,
+          "OA": 91.512,
+          "AA": 0.7676,
+          "Kappa": 0.884,
+          "Train Time (s)": 378.67,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        },
+        {
+          "seed": 92,
+          "OA": 90.0951,
+          "AA": 0.7377,
+          "Kappa": 0.8642,
+          "Train Time (s)": 339.27,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 1.89
+        }
+      ]
+    },
+    "Botswana": {
+      "average": {
+        "seed": 87.0,
+        "OA": 98.0328,
+        "AA": 0.9802,
+        "Kappa": 0.9787,
+        "Train Time (s)": 22.837,
+        "FLOPs(M)": 1.02,
+        "Params(K)": 2.21
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.6765,
+        "AA": 0.0179,
+        "Kappa": 0.0182,
+        "Train Time (s)": 7.5767,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.3852,
+          "AA": 0.9949,
+          "Kappa": 0.9933,
+          "Train Time (s)": 27.43,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.21
+        },
+        {
+          "seed": 112,
+          "OA": 97.541,
+          "AA": 0.9731,
+          "Kappa": 0.9734,
+          "Train Time (s)": 21.09,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.21
+        },
+        {
+          "seed": 122,
+          "OA": 97.3361,
+          "AA": 0.9751,
+          "Kappa": 0.9711,
+          "Train Time (s)": 16.24,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.21
+        },
+        {
+          "seed": 132,
+          "OA": 98.7705,
+          "AA": 0.9901,
+          "Kappa": 0.9867,
+          "Train Time (s)": 23.31,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.21
+        },
+        {
+          "seed": 42,
+          "OA": 98.9754,
+          "AA": 0.9911,
+          "Kappa": 0.9889,
+          "Train Time (s)": 30.05,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.21
+        },
+        {
+          "seed": 52,
+          "OA": 93.6475,
+          "AA": 0.9345,
+          "Kappa": 0.9312,
+          "Train Time (s)": 10.17,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.21
+        },
+        {
+          "seed": 62,
+          "OA": 98.3607,
+          "AA": 0.9793,
+          "Kappa": 0.9822,
+          "Train Time (s)": 31.72,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.21
+        },
+        {
+          "seed": 72,
+          "OA": 99.1803,
+          "AA": 0.9933,
+          "Kappa": 0.9911,
+          "Train Time (s)": 28.53,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.21
+        },
+        {
+          "seed": 82,
+          "OA": 98.3607,
+          "AA": 0.9803,
+          "Kappa": 0.9822,
+          "Train Time (s)": 27.26,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.21
+        },
+        {
+          "seed": 92,
+          "OA": 98.7705,
+          "AA": 0.9903,
+          "Kappa": 0.9867,
+          "Train Time (s)": 12.57,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.21
+        }
+      ]
+    },
+    "Salina": {
+      "average": {
+        "seed": 87.0,
+        "OA": 96.3411,
+        "AA": 0.9813,
+        "Kappa": 0.9592,
+        "Train Time (s)": 272.508,
+        "FLOPs(M)": 1.02,
+        "Params(K)": 2.34
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.3037,
+        "AA": 0.0064,
+        "Kappa": 0.0145,
+        "Train Time (s)": 102.6449,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 93.867,
+          "AA": 0.9674,
+          "Kappa": 0.9315,
+          "Train Time (s)": 134.44,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 112,
+          "OA": 96.9089,
+          "AA": 0.9837,
+          "Kappa": 0.9656,
+          "Train Time (s)": 252.47,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 122,
+          "OA": 97.6108,
+          "AA": 0.9869,
+          "Kappa": 0.9734,
+          "Train Time (s)": 498.09,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 132,
+          "OA": 97.8202,
+          "AA": 0.9884,
+          "Kappa": 0.9757,
+          "Train Time (s)": 326.47,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 42,
+          "OA": 96.1453,
+          "AA": 0.9801,
+          "Kappa": 0.957,
+          "Train Time (s)": 326.73,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 52,
+          "OA": 96.1946,
+          "AA": 0.9802,
+          "Kappa": 0.9576,
+          "Train Time (s)": 241.03,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 62,
+          "OA": 97.4877,
+          "AA": 0.9866,
+          "Kappa": 0.972,
+          "Train Time (s)": 314.98,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 72,
+          "OA": 95.7143,
+          "AA": 0.9749,
+          "Kappa": 0.9522,
+          "Train Time (s)": 157.91,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 82,
+          "OA": 97.0074,
+          "AA": 0.9853,
+          "Kappa": 0.9666,
+          "Train Time (s)": 229.52,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        },
+        {
+          "seed": 92,
+          "OA": 94.6552,
+          "AA": 0.9792,
+          "Kappa": 0.9407,
+          "Train Time (s)": 243.44,
+          "FLOPs(M)": 1.02,
+          "Params(K)": 2.34
+        }
+      ]
+    }
+  },
+  "results_collect": {},
+  "wo_FC64": {
+    "PaviaU": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.5091,
+        "AA": 0.9919,
+        "Kappa": 0.9935,
+        "Train Time (s)": 208.966,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 4.35
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.3752,
+        "AA": 0.0052,
+        "Kappa": 0.005,
+        "Train Time (s)": 66.8485,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.8909,
+          "AA": 0.9982,
+          "Kappa": 0.9986,
+          "Train Time (s)": 208.0,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 112,
+          "OA": 99.8286,
+          "AA": 0.9967,
+          "Kappa": 0.9977,
+          "Train Time (s)": 339.54,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 122,
+          "OA": 99.9221,
+          "AA": 0.9987,
+          "Kappa": 0.999,
+          "Train Time (s)": 266.41,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 132,
+          "OA": 99.7818,
+          "AA": 0.9937,
+          "Kappa": 0.9971,
+          "Train Time (s)": 212.01,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 42,
+          "OA": 99.6104,
+          "AA": 0.9934,
+          "Kappa": 0.9948,
+          "Train Time (s)": 210.35,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 52,
+          "OA": 99.4546,
+          "AA": 0.9932,
+          "Kappa": 0.9928,
+          "Train Time (s)": 166.6,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 62,
+          "OA": 98.8312,
+          "AA": 0.9866,
+          "Kappa": 0.9844,
+          "Train Time (s)": 264.82,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 72,
+          "OA": 99.4234,
+          "AA": 0.9873,
+          "Kappa": 0.9924,
+          "Train Time (s)": 143.46,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 82,
+          "OA": 98.9871,
+          "AA": 0.985,
+          "Kappa": 0.9866,
+          "Train Time (s)": 117.71,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 92,
+          "OA": 99.3611,
+          "AA": 0.9866,
+          "Kappa": 0.9915,
+          "Train Time (s)": 160.76,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        }
+      ]
+    },
+    "whu_hanchuan": {
+      "average": {
+        "seed": 87.0,
+        "OA": 94.0112,
+        "AA": 0.8419,
+        "Kappa": 0.9296,
+        "Train Time (s)": 363.786,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 4.45
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.095,
+        "AA": 0.0246,
+        "Kappa": 0.0128,
+        "Train Time (s)": 89.6178,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 94.62,
+          "AA": 0.8313,
+          "Kappa": 0.9367,
+          "Train Time (s)": 508.98,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.45
+        },
+        {
+          "seed": 112,
+          "OA": 93.3186,
+          "AA": 0.8311,
+          "Kappa": 0.9216,
+          "Train Time (s)": 320.58,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.45
+        },
+        {
+          "seed": 122,
+          "OA": 93.9345,
+          "AA": 0.8388,
+          "Kappa": 0.9288,
+          "Train Time (s)": 270.04,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.45
+        },
+        {
+          "seed": 132,
+          "OA": 92.7028,
+          "AA": 0.8103,
+          "Kappa": 0.914,
+          "Train Time (s)": 345.54,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.45
+        },
+        {
+          "seed": 42,
+          "OA": 93.8996,
+          "AA": 0.8377,
+          "Kappa": 0.9284,
+          "Train Time (s)": 376.38,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.45
+        },
+        {
+          "seed": 52,
+          "OA": 95.7588,
+          "AA": 0.8406,
+          "Kappa": 0.9501,
+          "Train Time (s)": 442.58,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.45
+        },
+        {
+          "seed": 62,
+          "OA": 92.1683,
+          "AA": 0.8275,
+          "Kappa": 0.9082,
+          "Train Time (s)": 238.46,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.45
+        },
+        {
+          "seed": 72,
+          "OA": 93.8764,
+          "AA": 0.8955,
+          "Kappa": 0.9282,
+          "Train Time (s)": 486.28,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.45
+        },
+        {
+          "seed": 82,
+          "OA": 95.1429,
+          "AA": 0.874,
+          "Kappa": 0.943,
+          "Train Time (s)": 319.55,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.45
+        },
+        {
+          "seed": 92,
+          "OA": 94.6898,
+          "AA": 0.8325,
+          "Kappa": 0.9375,
+          "Train Time (s)": 329.47,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.45
+        }
+      ]
+    },
+    "whu_honghu": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.0426,
+        "AA": 0.9746,
+        "Kappa": 0.9865,
+        "Train Time (s)": 515.775,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 4.57
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.2412,
+        "AA": 0.0146,
+        "Kappa": 0.0034,
+        "Train Time (s)": 169.4992,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.0858,
+          "AA": 0.9546,
+          "Kappa": 0.9871,
+          "Train Time (s)": 295.3,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.57
+        },
+        {
+          "seed": 112,
+          "OA": 99.2952,
+          "AA": 0.9909,
+          "Kappa": 0.9901,
+          "Train Time (s)": 439.15,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.57
+        },
+        {
+          "seed": 122,
+          "OA": 98.9393,
+          "AA": 0.9803,
+          "Kappa": 0.985,
+          "Train Time (s)": 426.09,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.57
+        },
+        {
+          "seed": 132,
+          "OA": 99.3789,
+          "AA": 0.9833,
+          "Kappa": 0.9913,
+          "Train Time (s)": 431.22,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.57
+        },
+        {
+          "seed": 42,
+          "OA": 99.3301,
+          "AA": 0.9818,
+          "Kappa": 0.9906,
+          "Train Time (s)": 844.92,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.57
+        },
+        {
+          "seed": 52,
+          "OA": 98.6741,
+          "AA": 0.9553,
+          "Kappa": 0.9813,
+          "Train Time (s)": 724.15,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.57
+        },
+        {
+          "seed": 62,
+          "OA": 98.7648,
+          "AA": 0.9517,
+          "Kappa": 0.9826,
+          "Train Time (s)": 564.32,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.57
+        },
+        {
+          "seed": 72,
+          "OA": 99.0091,
+          "AA": 0.9798,
+          "Kappa": 0.9861,
+          "Train Time (s)": 609.41,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.57
+        },
+        {
+          "seed": 82,
+          "OA": 99.0928,
+          "AA": 0.9844,
+          "Kappa": 0.9872,
+          "Train Time (s)": 458.01,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.57
+        },
+        {
+          "seed": 92,
+          "OA": 98.8555,
+          "AA": 0.9835,
+          "Kappa": 0.9839,
+          "Train Time (s)": 365.18,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.57
+        }
+      ]
+    },
+    "Indian_pines": {
+      "average": {
+        "seed": 87.0,
+        "OA": 95.9753,
+        "AA": 0.9628,
+        "Kappa": 0.9541,
+        "Train Time (s)": 99.705,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 4.47
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 1.9952,
+        "AA": 0.0232,
+        "Kappa": 0.0228,
+        "Train Time (s)": 25.8158,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 92.7828,
+          "AA": 0.9504,
+          "Kappa": 0.9173,
+          "Train Time (s)": 79.84,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 112,
+          "OA": 98.5046,
+          "AA": 0.9898,
+          "Kappa": 0.983,
+          "Train Time (s)": 116.3,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 122,
+          "OA": 97.7893,
+          "AA": 0.9831,
+          "Kappa": 0.9748,
+          "Train Time (s)": 88.65,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 132,
+          "OA": 97.8544,
+          "AA": 0.9838,
+          "Kappa": 0.9755,
+          "Train Time (s)": 107.61,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 42,
+          "OA": 94.7334,
+          "AA": 0.95,
+          "Kappa": 0.9398,
+          "Train Time (s)": 162.07,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 52,
+          "OA": 95.1886,
+          "AA": 0.9116,
+          "Kappa": 0.945,
+          "Train Time (s)": 71.01,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 62,
+          "OA": 97.7243,
+          "AA": 0.9617,
+          "Kappa": 0.9741,
+          "Train Time (s)": 99.81,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 72,
+          "OA": 96.619,
+          "AA": 0.9796,
+          "Kappa": 0.9615,
+          "Train Time (s)": 80.34,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 82,
+          "OA": 94.9935,
+          "AA": 0.9571,
+          "Kappa": 0.9427,
+          "Train Time (s)": 99.15,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 92,
+          "OA": 93.5631,
+          "AA": 0.9609,
+          "Kappa": 0.9269,
+          "Train Time (s)": 92.27,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        }
+      ]
+    },
+    "chikusei": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.5068,
+        "AA": 0.969,
+        "Kappa": 0.9943,
+        "Train Time (s)": 263.052,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 4.52
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.2971,
+        "AA": 0.0266,
+        "Kappa": 0.0034,
+        "Train Time (s)": 137.9414,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.6735,
+          "AA": 0.9831,
+          "Kappa": 0.9962,
+          "Train Time (s)": 260.3,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.52
+        },
+        {
+          "seed": 112,
+          "OA": 99.1752,
+          "AA": 0.9867,
+          "Kappa": 0.9905,
+          "Train Time (s)": 292.37,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.52
+        },
+        {
+          "seed": 122,
+          "OA": 99.622,
+          "AA": 0.9585,
+          "Kappa": 0.9956,
+          "Train Time (s)": 167.57,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.52
+        },
+        {
+          "seed": 132,
+          "OA": 99.6649,
+          "AA": 0.9807,
+          "Kappa": 0.9961,
+          "Train Time (s)": 92.61,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.52
+        },
+        {
+          "seed": 42,
+          "OA": 99.0463,
+          "AA": 0.9685,
+          "Kappa": 0.989,
+          "Train Time (s)": 610.09,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.52
+        },
+        {
+          "seed": 52,
+          "OA": 99.4845,
+          "AA": 0.9594,
+          "Kappa": 0.994,
+          "Train Time (s)": 262.77,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.52
+        },
+        {
+          "seed": 62,
+          "OA": 99.8024,
+          "AA": 0.9959,
+          "Kappa": 0.9977,
+          "Train Time (s)": 179.55,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.52
+        },
+        {
+          "seed": 72,
+          "OA": 99.8282,
+          "AA": 0.9871,
+          "Kappa": 0.998,
+          "Train Time (s)": 305.18,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.52
+        },
+        {
+          "seed": 82,
+          "OA": 99.0807,
+          "AA": 0.9021,
+          "Kappa": 0.9894,
+          "Train Time (s)": 250.7,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.52
+        },
+        {
+          "seed": 92,
+          "OA": 99.6907,
+          "AA": 0.9675,
+          "Kappa": 0.9964,
+          "Train Time (s)": 209.38,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.52
+        }
+      ]
+    },
+    "whu_longkou": {
+      "average": {
+        "seed": 87.0,
+        "OA": 95.0077,
+        "AA": 0.894,
+        "Kappa": 0.933,
+        "Train Time (s)": 443.77,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 4.35
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.9866,
+        "AA": 0.0436,
+        "Kappa": 0.0138,
+        "Train Time (s)": 152.0856,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 93.4078,
+          "AA": 0.8203,
+          "Kappa": 0.91,
+          "Train Time (s)": 405.22,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 112,
+          "OA": 96.2549,
+          "AA": 0.9468,
+          "Kappa": 0.9503,
+          "Train Time (s)": 329.16,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 122,
+          "OA": 93.6274,
+          "AA": 0.8281,
+          "Kappa": 0.9136,
+          "Train Time (s)": 298.93,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 132,
+          "OA": 95.1374,
+          "AA": 0.8694,
+          "Kappa": 0.9342,
+          "Train Time (s)": 223.07,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 42,
+          "OA": 94.8314,
+          "AA": 0.8919,
+          "Kappa": 0.9308,
+          "Train Time (s)": 659.86,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 52,
+          "OA": 95.0975,
+          "AA": 0.9231,
+          "Kappa": 0.935,
+          "Train Time (s)": 598.06,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 62,
+          "OA": 95.6296,
+          "AA": 0.92,
+          "Kappa": 0.9415,
+          "Train Time (s)": 653.52,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 72,
+          "OA": 95.4167,
+          "AA": 0.8995,
+          "Kappa": 0.9386,
+          "Train Time (s)": 491.75,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 82,
+          "OA": 96.3148,
+          "AA": 0.9429,
+          "Kappa": 0.951,
+          "Train Time (s)": 365.84,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        },
+        {
+          "seed": 92,
+          "OA": 94.3591,
+          "AA": 0.8981,
+          "Kappa": 0.9248,
+          "Train Time (s)": 412.29,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.35
+        }
+      ]
+    },
+    "Botswana": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.4262,
+        "AA": 0.9942,
+        "Kappa": 0.9938,
+        "Train Time (s)": 28.015,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 4.43
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.3456,
+        "AA": 0.0034,
+        "Kappa": 0.0038,
+        "Train Time (s)": 8.6759,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.7951,
+          "AA": 0.9985,
+          "Kappa": 0.9978,
+          "Train Time (s)": 21.25,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.43
+        },
+        {
+          "seed": 112,
+          "OA": 98.7705,
+          "AA": 0.9895,
+          "Kappa": 0.9867,
+          "Train Time (s)": 36.68,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.43
+        },
+        {
+          "seed": 122,
+          "OA": 99.5902,
+          "AA": 0.9955,
+          "Kappa": 0.9956,
+          "Train Time (s)": 31.27,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.43
+        },
+        {
+          "seed": 132,
+          "OA": 99.5902,
+          "AA": 0.996,
+          "Kappa": 0.9956,
+          "Train Time (s)": 46.19,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.43
+        },
+        {
+          "seed": 42,
+          "OA": 99.7951,
+          "AA": 0.9985,
+          "Kappa": 0.9978,
+          "Train Time (s)": 22.97,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.43
+        },
+        {
+          "seed": 52,
+          "OA": 99.3852,
+          "AA": 0.9954,
+          "Kappa": 0.9933,
+          "Train Time (s)": 22.67,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.43
+        },
+        {
+          "seed": 62,
+          "OA": 99.1803,
+          "AA": 0.9914,
+          "Kappa": 0.9911,
+          "Train Time (s)": 28.9,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.43
+        },
+        {
+          "seed": 72,
+          "OA": 99.5902,
+          "AA": 0.9898,
+          "Kappa": 0.9956,
+          "Train Time (s)": 18.14,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.43
+        },
+        {
+          "seed": 82,
+          "OA": 98.9754,
+          "AA": 0.9912,
+          "Kappa": 0.9889,
+          "Train Time (s)": 31.31,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.43
+        },
+        {
+          "seed": 92,
+          "OA": 99.5902,
+          "AA": 0.9965,
+          "Kappa": 0.9956,
+          "Train Time (s)": 20.77,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.43
+        }
+      ]
+    },
+    "Salina": {
+      "average": {
+        "seed": 87.0,
+        "OA": 99.5111,
+        "AA": 0.9971,
+        "Kappa": 0.9946,
+        "Train Time (s)": 295.115,
+        "FLOPs(M)": 6.2,
+        "Params(K)": 4.47
+      },
+      "std": {
+        "seed": 30.2765,
+        "OA": 0.294,
+        "AA": 0.0025,
+        "Kappa": 0.0033,
+        "Train Time (s)": 99.2011,
+        "FLOPs(M)": 0.0,
+        "Params(K)": 0.0
+      },
+      "seeds": [
+        {
+          "seed": 102,
+          "OA": 99.2118,
+          "AA": 0.9962,
+          "Kappa": 0.9912,
+          "Train Time (s)": 246.16,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 112,
+          "OA": 99.2488,
+          "AA": 0.9961,
+          "Kappa": 0.9916,
+          "Train Time (s)": 292.93,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 122,
+          "OA": 99.6675,
+          "AA": 0.9983,
+          "Kappa": 0.9963,
+          "Train Time (s)": 185.32,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 132,
+          "OA": 99.5936,
+          "AA": 0.9976,
+          "Kappa": 0.9955,
+          "Train Time (s)": 210.29,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 42,
+          "OA": 99.5197,
+          "AA": 0.9977,
+          "Kappa": 0.9947,
+          "Train Time (s)": 376.44,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 52,
+          "OA": 99.2118,
+          "AA": 0.9972,
+          "Kappa": 0.9912,
+          "Train Time (s)": 224.54,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 62,
+          "OA": 99.9261,
+          "AA": 0.9995,
+          "Kappa": 0.9992,
+          "Train Time (s)": 314.96,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 72,
+          "OA": 99.6182,
+          "AA": 0.9982,
+          "Kappa": 0.9957,
+          "Train Time (s)": 256.55,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 82,
+          "OA": 99.9507,
+          "AA": 0.9997,
+          "Kappa": 0.9995,
+          "Train Time (s)": 525.06,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        },
+        {
+          "seed": 92,
+          "OA": 99.1626,
+          "AA": 0.9909,
+          "Kappa": 0.9907,
+          "Train Time (s)": 318.9,
+          "FLOPs(M)": 6.2,
+          "Params(K)": 4.47
+        }
+      ]
+    }
+  }
+}

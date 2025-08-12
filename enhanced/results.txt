@@ -1,0 +1,114 @@
+## Chikusei
+
+📊 Summary of Repeated Training:
+Run 1: 99.72%
+Run 2: 99.60%
+Run 3: 99.67%
+Run 4: 97.86%
+Run 5: 99.30%
+Run 6: 99.28%
+Run 7: 99.64%
+Run 8: 99.72%
+Run 9: 99.56%
+Run 10: 99.54%
+
+Average Accuracy: 99.39%, Std Dev: 0.53%
+
+
+
+## WHU_HI_HanChuan
+
+📊 Summary of Repeated Training:
+Run 1: 90.09%
+Run 2: 93.64%
+Run 3: 89.41%
+Run 4: 91.98%
+Run 5: 91.48%
+Run 6: 92.87%
+Run 7: 92.58%
+Run 8: 89.96%
+Run 9: 89.28%
+Run 10: 91.18%
+
+Average Accuracy: 91.25%, Std Dev: 1.45%
+
+## WHU_HI_HongHu
+
+📊 Summary of Repeated Training:
+Run 1: 90.40%
+Run 2: 96.71%
+Run 3: 96.62%
+Run 4: 90.28%
+Run 5: 93.58%
+Run 6: 96.80%
+Run 7: 96.56%
+Run 8: 96.26%
+Run 9: 96.64%
+Run 10: 97.78%
+
+Average Accuracy: 95.16%, Std Dev: 2.62%
+
+## WHU_HI_LongKou
+
+📊 Summary of Repeated Training:
+Run 1: 91.98%
+Run 2: 94.78%
+Run 3: 93.75%
+Run 4: 94.20%
+Run 5: 93.38%
+Run 6: 92.46%
+Run 7: 93.32%
+Run 8: 92.58%
+Run 9: 93.72%
+Run 10: 93.34%
+
+Average Accuracy: 93.35%, Std Dev: 0.80%
+
+
+## Indian_pines
+
+📊 Summary of Repeated Training:
+Run 1: 82.44%
+Run 2: 88.75%
+Run 3: 91.87%
+Run 4: 85.83%
+Run 5: 89.08%
+Run 6: 90.90%
+Run 7: 85.11%
+Run 8: 90.57%
+Run 9: 87.13%
+Run 10: 86.61%
+
+Average Accuracy: 87.83%, Std Dev: 2.79%
+
+## Pavia_U
+
+📊 Summary of Repeated Training:
+Run 1: 99.33%
+Run 2: 99.21%
+Run 3: 99.58%
+Run 4: 98.63%
+Run 5: 99.24%
+Run 6: 99.08%
+Run 7: 99.53%
+Run 8: 98.68%
+Run 9: 99.44%
+Run 10: 94.30%
+
+Average Accuracy: 98.70%, Std Dev: 1.50%
+
+## Botswana
+
+📊 Summary of Repeated Training:
+Run 1: 99.39%
+Run 2: 100.00%
+Run 3: 99.59%
+Run 4: 99.80%
+Run 5: 99.59%
+Run 6: 99.80%
+Run 7: 99.59%
+Run 8: 99.80%
+Run 9: 99.80%
+Run 10: 99.39%
+
+Average Accuracy: 99.67%, Std Dev: 0.19%

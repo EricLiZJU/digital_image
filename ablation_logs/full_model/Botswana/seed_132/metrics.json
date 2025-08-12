@@ -1,0 +1,23 @@
+{
+  "seed": 132,
+  "dataset": "Botswana",
+  "overall_accuracy": 99.7951,
+  "average_accuracy": 0.9974,
+  "kappa": 0.9978,
+  "per_class_accuracy": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.963,
+    1.0,
+    1.0
+  ]
+}

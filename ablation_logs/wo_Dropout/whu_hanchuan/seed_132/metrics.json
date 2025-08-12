@@ -1,0 +1,18 @@
+{
+  "seed": 132,
+  "dataset": "whu_hanchuan",
+  "overall_accuracy": 92.4936,
+  "average_accuracy": 0.8075,
+  "kappa": 0.9116,
+  "per_class_accuracy": [
+    0.9967,
+    0.9196,
+    0.9951,
+    0.9474,
+    0.9278,
+    0.9432,
+    0.5885,
+    0.9491,
+    0.0
+  ]
+}
