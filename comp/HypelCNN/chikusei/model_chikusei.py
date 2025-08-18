@@ -1,151 +1,263 @@
-# train_3dcnn_with_logging.py
-import os
-import time
-import json
-import random
-import torch
+# train_hypelcnn_with_logging.py
+import os, time, json, math, random
 import numpy as np
-import h5py
 import scipy.io as scio
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
-from scipy.io import loadmat
+import h5py
 
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.utils.data import DataLoader, TensorDataset
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, cohen_kappa_score
+from scipy.io import loadmat
+
+# ptflops 计算复杂度（与你现有脚本一致）
 from ptflops import get_model_complexity_info
-from torch import nn, optim
-from torch.utils.data import DataLoader, TensorDataset
 
 
+# ===================== 通用工具 =====================
 def set_seed(seed=42):
-    random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
+    random.seed(seed); np.random.seed(seed)
+    torch.manual_seed(seed); torch.cuda.manual_seed_all(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
 
-class CNN2D(nn.Module):
-    def __init__(self, in_channels=3, num_classes=16):
-        super(CNN2D, self).__init__()
-        self.features = nn.Sequential(
-            nn.Conv2d(in_channels, 16, kernel_size=3, padding=1),  # (C,7,7)->(32,7,7)
-            nn.ReLU(inplace=True),
-            nn.BatchNorm2d(16),
-            nn.MaxPool2d(2),  # (32,7,7)->(32,3,3)
-        )
-        self.classifier = nn.Sequential(
-            nn.Flatten(),
-            nn.Linear(16 * 3 * 3, 32),
-            nn.ReLU(inplace=True),
-            nn.Dropout(0.7),
-            nn.Linear(32, num_classes)
-        )
-
-    def forward(self, x):
-        x = self.features(x)
-        x = self.classifier(x)
-        return x
-
-
 def extract_2d_patches(img_cube, label_map, patch_size=7, ignored_label=0):
-    """
-    2D Patch 提取：输入 (H, W, C) -> 输出 (N, C, H, W)
-    仅对中心像素有标签的 patch 进行采样；标签从0开始（剔除ignored_label=0）
-    """
     assert patch_size % 2 == 1, "patch_size must be odd."
     H, W, C = img_cube.shape
     pad = patch_size // 2
-
-    # 基本健壮性检查
     if label_map.shape != (H, W):
-        raise ValueError(f"label_map shape {label_map.shape} != image spatial shape {(H, W)}")
-    if C < 1:
-        raise ValueError("img_cube must have at least 1 channel")
+        raise ValueError(f"label_map shape {label_map.shape} != {(H, W)}")
     if np.all(label_map == ignored_label):
-        raise ValueError("All labels equal to ignored_label; no samples to extract.")
+        raise ValueError("All labels equal to ignored_label.")
 
-    # 边界填充
     padded_img = np.pad(img_cube, ((pad, pad), (pad, pad), (0, 0)), mode='reflect')
     padded_label = np.pad(label_map, ((pad, pad), (pad, pad)), mode='constant', constant_values=ignored_label)
 
-    # ✅ 正确的初始化
-    patches = []
-    labels = []
-
+    patches, labels = [], []
     for i in range(pad, H + pad):
         for j in range(pad, W + pad):
             lab = padded_label[i, j]
             if lab == ignored_label:
                 continue
             patch = padded_img[i - pad:i + pad + 1, j - pad:j + pad + 1, :]
-            # (H, W, C) -> (C, H, W)
-            patch = np.transpose(patch, (2, 0, 1))
+            patch = np.transpose(patch, (2, 0, 1))  # (C,H,W)
             patches.append(patch)
-            labels.append(lab - 1)  # 标签从0开始
-
+            labels.append(lab - 1)
     patches = np.asarray(patches, dtype='float32')
     labels = np.asarray(labels, dtype='int64')
-
     if len(labels) == 0:
-        raise ValueError("No labeled patches extracted. Check label_map and ignored_label setting.")
-
+        raise ValueError("No labeled patches extracted.")
     return patches, labels
 
 
-def evaluate_and_log_metrics_2d(y_true, y_pred, model, run_seed, dataset_name, acc,
-                                in_channels, patch_size, log_root, train_time=None, val_time=None):
-    log_dir = log_root
-    os.makedirs(log_dir, exist_ok=True)
-
+def evaluate_and_log_metrics(y_true, y_pred, model, run_seed, dataset_name, acc,
+                             in_channels, patch_size, log_root, train_time=None, val_time=None):
+    os.makedirs(log_root, exist_ok=True)
     conf_mat = confusion_matrix(y_true, y_pred)
-    per_class_acc = conf_mat.diagonal() / conf_mat.sum(axis=1)
-    aa = per_class_acc.mean()
-    kappa = cohen_kappa_score(y_true, y_pred)
+    with np.errstate(divide='ignore', invalid='ignore'):
+        per_class_acc = conf_mat.diagonal() / conf_mat.sum(axis=1)
+        per_class_acc = np.nan_to_num(per_class_acc, nan=0.0)
+    aa = float(per_class_acc.mean())
+    kappa = float(cohen_kappa_score(y_true, y_pred))
 
-    metrics = {
-        "seed": run_seed,
-        "dataset": dataset_name,
-        "overall_accuracy": round(acc, 4),
-        "average_accuracy": round(aa, 4),
-        "kappa": round(kappa, 4),
-        "per_class_accuracy": [round(float(x), 4) for x in per_class_acc.tolist()]
-    }
-    with open(os.path.join(log_dir, "metrics.json"), "w") as f:
-        json.dump(metrics, f, indent=2)
+    with open(os.path.join(log_root, "metrics.json"), "w") as f:
+        json.dump({
+            "seed": run_seed, "dataset": dataset_name,
+            "overall_accuracy": round(float(acc), 4),
+            "average_accuracy": round(aa, 4),
+            "kappa": round(kappa, 4),
+            "per_class_accuracy": [round(float(x), 4) for x in per_class_acc.tolist()]
+        }, f, indent=2)
 
-    # FLOPs/Params
-    flops, params = get_model_complexity_info(
-        model, (in_channels, patch_size, patch_size),
-        as_strings=False, print_per_layer_stat=False
-    )
-    flops_info = {"FLOPs(M)": round(flops / 1e6, 2), "Params(K)": round(params / 1e3, 2)}
-    with open(os.path.join(log_dir, "model_profile.json"), "w") as f:
+    # FLOPs / Params （与2D脚本一致用 ptflops）
+    try:
+        flops, params = get_model_complexity_info(
+            model, (in_channels, patch_size, patch_size),
+            as_strings=False, print_per_layer_stat=False
+        )
+        flops_info = {"FLOPs(M)": round(flops / 1e6, 2), "Params(K)": round(params / 1e3, 2)}
+    except Exception:
+        total_params = sum(p.numel() for p in model.parameters())
+        flops_info = {"FLOPs(M)": None, "Params(K)": round(total_params / 1e3, 2)}
+    with open(os.path.join(log_root, "model_profile.json"), "w") as f:
         json.dump(flops_info, f, indent=2)
 
-    time_info = {
-        "train_time(s)": round(train_time, 2) if train_time else None,
-        "val_time(s)": round(val_time, 2) if val_time else None
-    }
-    with open(os.path.join(log_dir, "time_log.json"), "w") as f:
-        json.dump(time_info, f, indent=2)
+    with open(os.path.join(log_root, "time_log.json"), "w") as f:
+        json.dump({
+            "train_time(s)": round(train_time, 2) if train_time else None,
+            "val_time(s)": round(val_time, 2) if val_time else None
+        }, f, indent=2)
 
-    np.savetxt(os.path.join(log_dir, "confusion_matrix.csv"), conf_mat, fmt="%d", delimiter=",")
+    np.savetxt(os.path.join(log_root, "confusion_matrix.csv"), conf_mat, fmt="%d", delimiter=",")
 
-def train_and_evaluate_2d(dataset_name,
-                          run_seed=42,
-                          data_path='../../root/data/HSI_dataset/Chikusei_MATLAB/HyperspecVNIR_Chikusei_20140729.mat',
-                          label_path = '../../root/data/HSI_dataset/Chikusei_MATLAB/HyperspecVNIR_Chikusei_20140729_Ground_Truth.mat',
-                          pca_components=3,           # 为公平可改为30
-                          patch_size=7,
-                          batch_size=128,
-                          max_epochs=200,
-                          patience=10,
-                          lr=1e-3):
+
+# ===================== PyTorch 版 HypelCNN =====================
+class ScaleToOut(nn.Module):
+    """通道对齐的 1x1 卷积（仅当 in/out 通道不一致时启用）。空间尺寸不变时用于残差对齐。"""
+    def __init__(self, in_ch, out_ch):
+        super().__init__()
+        self.need = in_ch != out_ch
+        self.proj = nn.Conv2d(in_ch, out_ch, kernel_size=1, bias=False) if self.need else nn.Identity()
+    def forward(self, x):
+        return self.proj(x) if self.need else x
+
+
+def conv_bn_act(in_ch, out_ch, k=1, stride=1, padding=None, bn_momentum=0.01, act=None, bias=False):
+    if padding is None: padding = k // 2
+    layers = [nn.Conv2d(in_ch, out_ch, k, stride=stride, padding=padding, bias=bias),
+              nn.BatchNorm2d(out_ch, momentum=bn_momentum)]
+    if act is not None: layers.append(act)
+    return nn.Sequential(*layers)
+
+
+class HypelCNN(nn.Module):
+    """
+    参考原 TF 版 HYPELCNNModel：
+      - 谱向编码/解码：若干层 1x1 conv（带 BN + LeakyReLU），可残差
+      - 空间层级块：对 k=1..patch_size 的奇数 k 做 k×k 卷积拼接，然后 1×1 融合，可残差
+      - 全连接降维块：每次除以 degradation_coeff 直到接近类别数，层间 Dropout
+    """
+    def __init__(self,
+                 in_channels=30,
+                 num_classes=16,
+                 filter_count=1200,
+                 spectral_hierarchy_level=3,
+                 spatial_hierarchy_level=3,
+                 lrelu_alpha=0.18,
+                 bn_decay=0.99,
+                 dropout_ratio=0.4,
+                 degradation_coeff=3,
+                 use_residual=True,
+                 patch_size=7):
+        super().__init__()
+        self.num_classes = num_classes
+        self.use_residual = use_residual
+        self.degradation_coeff = degradation_coeff
+        bn_momentum = 1.0 - bn_decay
+        act = nn.LeakyReLU(lrelu_alpha, inplace=True)
+        self.act = act
+        self.patch_size = patch_size
+
+        # 输入通道先扩展到较高维度（对标 TF 的 level_filter_count）
+        self.stem = conv_bn_act(in_channels, filter_count, k=1, bn_momentum=bn_momentum, act=act)
+
+        # 谱向编码阶段（encoding）
+        self.spec_enc = nn.ModuleList()
+        in_ch = filter_count
+        for i in range(spectral_hierarchy_level):
+            out_ch = max(filter_count // (2 ** ((spectral_hierarchy_level - 1) - i)), 8)
+            block = conv_bn_act(in_ch, out_ch, k=1, bn_momentum=bn_momentum, act=act)
+            proj = ScaleToOut(in_ch, out_ch)
+            self.spec_enc.append(nn.ModuleDict({"conv": block, "proj": proj}))
+            in_ch = out_ch
+
+        # 谱向解码阶段（decoding）
+        self.spec_dec = nn.ModuleList()
+        for i in range(spectral_hierarchy_level):
+            out_ch = max(filter_count // (2 ** i), 8)
+            block = conv_bn_act(in_ch, out_ch, k=1, bn_momentum=bn_momentum, act=act)
+            proj = ScaleToOut(in_ch, out_ch)
+            self.spec_dec.append(nn.ModuleDict({"conv": block, "proj": proj}))
+            in_ch = out_ch
+
+        # 空间层级块
+        self.spatial_blocks = nn.ModuleList()
+        cur_ch = in_ch
+        for lvl in range(spatial_hierarchy_level):
+            # 本层的每个分支通道数
+            branch_ch = max(cur_ch // (2 ** lvl), 8)
+            # odd k: 1,3,5,...,<=patch_size
+            ks = list(range(1, patch_size + 1, 2))
+            branches = nn.ModuleList([conv_bn_act(cur_ch, branch_ch, k=k, bn_momentum=bn_momentum, act=act)
+                                      for k in ks])
+            fuse = conv_bn_act(branch_ch * len(ks), cur_ch, k=1, bn_momentum=bn_momentum, act=None)
+            proj = ScaleToOut(cur_ch, cur_ch)
+            self.spatial_blocks.append(nn.ModuleDict({"branches": branches, "fuse": fuse, "proj": proj}))
+            # 经过 1x1 融合后，通道仍维持 cur_ch
+
+        # 分类头：Flatten -> FC 降维块（几何衰减）-> 最终分类
+        # 这里全连接层的输入维度依赖于 spatial 输出的通道数与 patch_size
+        self.dropout_ratio = dropout_ratio
+        self.classifier = None  # 延迟初始化，根据前向时的展平维度构建
+        self.final_fc = None
+
+    # 替换原来的 _build_fc
+    def _build_fc(self, flatten_dim):
+        layers = []
+        elem = flatten_dim
+        if self.degradation_coeff < 2:
+            self.degradation_coeff = 2
+        fc_stage_count = max(1, int(math.floor(math.log(max(elem / self.num_classes, 1.0), self.degradation_coeff))))
+        for _ in range(fc_stage_count - 1):
+            elem = max(self.num_classes, elem // self.degradation_coeff)
+            layers += [nn.Linear(flatten_dim, elem), nn.LeakyReLU(0.18, inplace=True), nn.Dropout(self.dropout_ratio)]
+            flatten_dim = elem
+        self.classifier = nn.Sequential(*layers) if layers else nn.Identity()
+        self.final_fc = nn.Linear(flatten_dim, self.num_classes)
+
+    # 替换原来的 forward（关键是把新建层迁移到 out.device）
+    def forward(self, x):
+        # x: (B, C, H, W)
+        out = self.stem(x)
+
+        for m in self.spec_enc:
+            y = m["conv"](out)
+            out = y + m["proj"](out) if self.use_residual else y
+            out = F.leaky_relu(out, negative_slope=0.18, inplace=True)
+
+        for m in self.spec_dec:
+            y = m["conv"](out)
+            out = y + m["proj"](out) if self.use_residual else y
+            out = F.leaky_relu(out, negative_slope=0.18, inplace=True)
+
+        for m in self.spatial_blocks:
+            feats = [branch(out) for branch in m["branches"]]
+            y = torch.cat(feats, dim=1)
+            y = m["fuse"](y)
+            out = y + m["proj"](out) if self.use_residual else y
+
+        B = out.size(0)
+        flat = out.view(B, -1)
+
+        # 懒构建 + 立刻迁移到与输入同设备
+        if self.classifier is None or self.final_fc is None:
+            self._build_fc(flat.size(1))
+            dev = out.device
+            self.classifier = self.classifier.to(dev)
+            self.final_fc = self.final_fc.to(dev)
+
+        z = self.classifier(flat)
+        logits = self.final_fc(z)
+        return logits
+
+
+# ===================== 训练与评测流程（与你2D脚本一致） =====================
+def train_and_evaluate_hypelcnn(run_seed=42,
+                                dataset_name="Botswana",
+                                data_path='../../root/data/HSI_dataset/Chikusei_MATLAB/HyperspecVNIR_Chikusei_20140729.mat',
+                                label_path='../../root/data/HSI_dataset/Chikusei_MATLAB/HyperspecVNIR_Chikusei_20140729_Ground_Truth.mat',
+                                pca_components=30,
+                                patch_size=7,
+                                batch_size=128,
+                                max_epochs=200,
+                                patience=10,
+                                lr=1e-3,
+                                filter_count=1200,
+                                spectral_hierarchy_level=3,
+                                spatial_hierarchy_level=3,
+                                lrelu_alpha=0.18,
+                                bn_decay=0.99,
+                                dropout_ratio=0.4,
+                                degradation_coeff=3,
+                                use_residual=True):
     set_seed(run_seed)
+
     with h5py.File(data_path, 'r') as f:
         # 通常 v7.3 的数据是以 dataset 名义存储，检查键名（比如 'chikusei'）
         print("Keys:", list(f.keys()))
@@ -189,7 +301,7 @@ def train_and_evaluate_2d(dataset_name,
     num_classes = int(patch_labels.max()) + 1
     in_channels = pca_components
 
-    # ---- 划分 70/15/15（与3D脚本保持一致随机种子与比例）----
+    # ---- 划分 70/15/15 ----
     X_train_full, X_test, y_train_full, y_test = train_test_split(
         patches, patch_labels, test_size=0.15, stratify=patch_labels, random_state=42
     )
@@ -197,51 +309,58 @@ def train_and_evaluate_2d(dataset_name,
         X_train_full, y_train_full, test_size=0.176, stratify=y_train_full, random_state=42
     )
 
-    # ---- Dataloader ----
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     train_loader = DataLoader(TensorDataset(torch.from_numpy(X_train), torch.from_numpy(y_train)),
-                              batch_size=batch_size, shuffle=True)
+                              batch_size=batch_size, shuffle=True, pin_memory=True)
     val_loader = DataLoader(TensorDataset(torch.from_numpy(X_val), torch.from_numpy(y_val)),
-                            batch_size=batch_size, shuffle=False)
+                            batch_size=batch_size, shuffle=False, pin_memory=True)
     test_loader = DataLoader(TensorDataset(torch.from_numpy(X_test), torch.from_numpy(y_test)),
-                             batch_size=batch_size, shuffle=False)
+                             batch_size=batch_size, shuffle=False, pin_memory=True)
 
-    # ---- 模型&优化器 ----
-    model = CNN2D(in_channels=in_channels, num_classes=num_classes).to(device)
-    optimizer = optim.Adam(model.parameters(), lr=lr)
+    # ---- 模型 & 优化器 ----
+    model = HypelCNN(
+        in_channels=in_channels,
+        num_classes=num_classes,
+        filter_count=filter_count,
+        spectral_hierarchy_level=spectral_hierarchy_level,
+        spatial_hierarchy_level=spatial_hierarchy_level,
+        lrelu_alpha=lrelu_alpha,
+        bn_decay=bn_decay,
+        dropout_ratio=dropout_ratio,
+        degradation_coeff=degradation_coeff,
+        use_residual=use_residual,
+        patch_size=patch_size
+    ).to(device)
+
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=1e-4)
     criterion = nn.CrossEntropyLoss()
 
-    best_val_loss = float('inf')
-    patience_counter = 0
+    best_val_loss = float('inf'); patience_counter = 0
     best_model_weights = None
     train_losses, val_losses = [], []
 
     # ---- 训练 ----
     train_start = time.time()
     for epoch in range(1, max_epochs + 1):
-        # Train
-        model.train()
-        train_loss = 0.0
-        for X_batch, y_batch in train_loader:
-            X_batch, y_batch = X_batch.to(device), y_batch.to(device)
+        model.train(); train_loss = 0.0
+        for Xb, yb in train_loader:
+            Xb, yb = Xb.to(device), yb.to(device)
             optimizer.zero_grad()
-            output = model(X_batch)
-            loss = criterion(output, y_batch)
+            out = model(Xb)
+            loss = criterion(out, yb)
             loss.backward()
             optimizer.step()
             train_loss += loss.item()
 
         # Val
-        model.eval()
-        val_loss = 0.0
+        model.eval(); val_loss = 0.0
         with torch.no_grad():
-            for X_batch, y_batch in val_loader:
-                X_batch, y_batch = X_batch.to(device), y_batch.to(device)
-                val_loss += criterion(model(X_batch), y_batch).item()
+            for Xb, yb in val_loader:
+                Xb, yb = Xb.to(device), yb.to(device)
+                val_loss += criterion(model(Xb), yb).item()
 
         print(f"Epoch {epoch}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}")
-        train_losses.append(train_loss)
-        val_losses.append(val_loss)
+        train_losses.append(train_loss); val_losses.append(val_loss)
 
         if val_loss < best_val_loss:
             best_val_loss = val_loss
@@ -253,88 +372,73 @@ def train_and_evaluate_2d(dataset_name,
                 print(f"⏹️ Early stopping at epoch {epoch}")
                 break
 
-    train_end = time.time()
-    train_time = train_end - train_start
+    train_time = time.time() - train_start
 
     # ---- 测试 ----
-    val_start = time.time()
     if best_model_weights is not None:
         model.load_state_dict(best_model_weights)
-    model.eval()
-    all_true_labels, all_pred_labels = [], []
+    model.eval(); all_true, all_pred = [], []
+    val_start = time.time()
     with torch.no_grad():
-        for X_batch, y_batch in test_loader:
-            X_batch, y_batch = X_batch.to(device), y_batch.to(device)
-            preds = model(X_batch).argmax(dim=1)
-            all_true_labels.extend(y_batch.cpu().numpy())
-            all_pred_labels.extend(preds.cpu().numpy())
-
-    acc = np.mean(np.array(all_true_labels) == np.array(all_pred_labels)) * 100.0
+        for Xb, yb in test_loader:
+            Xb, yb = Xb.to(device), yb.to(device)
+            pred = model(Xb).argmax(dim=1)
+            all_true.extend(yb.cpu().numpy()); all_pred.extend(pred.cpu().numpy())
+    acc = np.mean(np.array(all_true) == np.array(all_pred)) * 100.0
     print(f"✅ Test Accuracy: {acc:.2f}%")
-    val_end = time.time()
-    val_time = val_end - val_start
+    val_time = time.time() - val_start
 
-    # ---- 日志 & 曲线 ----
-    log_root = f"comp_logs/2D-CNN/{dataset_name}/seed_{run_seed}"
+    # ---- 日志 ----
+    log_root = f"comp_logs/HypelCNN/{dataset_name}/seed_{run_seed}"
     os.makedirs(log_root, exist_ok=True)
 
-    # 保存loss曲线
-    loss_log = {
-        "train_loss": [round(float(l), 4) for l in train_losses],
-        "val_loss": [round(float(l), 4) for l in val_losses]
-    }
     with open(os.path.join(log_root, "loss_curve.json"), "w") as f:
-        json.dump(loss_log, f, indent=2)
+        json.dump({
+            "train_loss": [round(float(l), 4) for l in train_losses],
+            "val_loss": [round(float(l), 4) for l in val_losses]
+        }, f, indent=2)
 
-    # 评估指标/FLOPs/时间/混淆矩阵
-    evaluate_and_log_metrics_2d(
-        y_true=np.array(all_true_labels),
-        y_pred=np.array(all_pred_labels),
+    evaluate_and_log_metrics(
+        y_true=np.array(all_true),
+        y_pred=np.array(all_pred),
         model=model,
         run_seed=run_seed,
         dataset_name=str(dataset_name),
         acc=acc,
         in_channels=in_channels,
         patch_size=patch_size,
-        train_time=train_time,
-        val_time=val_time,
         log_root=log_root,
+        train_time=train_time,
+        val_time=val_time
     )
 
-    # ---- 分类图像可视化 ----
+    # ---- 分类图可视化 ----
     print("🖼️ Generating classification maps...")
     pred_map = np.zeros((h, w), dtype=int)
-    gt_map = label_map.copy()
-    mask = (gt_map != 0)
+    gt_map = label_map.copy(); mask = (gt_map != 0)
 
     for i in range(h):
         for j in range(w):
             if mask[i, j]:
                 patch = data_cube[i - (patch_size // 2): i + (patch_size // 2) + 1,
-                        j - (patch_size // 2): j + (patch_size // 2) + 1, :]
+                                  j - (patch_size // 2): j + (patch_size // 2) + 1, :]
                 if patch.shape != (patch_size, patch_size, in_channels):
                     continue
-                patch = np.transpose(patch, (2, 0, 1))  # (C,H,W)
+                patch = np.transpose(patch, (2, 0, 1))
                 patch_tensor = torch.tensor(patch, dtype=torch.float32).unsqueeze(0).to(device)
                 with torch.no_grad():
                     pred_label = model(patch_tensor).argmax(dim=1).item()
-                pred_map[i, j] = pred_label + 1  # 可视化从1开始
+                pred_map[i, j] = pred_label + 1
 
-    # 颜色映射
-    num_classes = int(patch_labels.max()) + 1
-    cmap = mcolors.ListedColormap(plt.colormaps['tab20'].colors[:num_classes])
+    num_classes_viz = int(patch_labels.max()) + 1
+    cmap = mcolors.ListedColormap(plt.colormaps['tab20'].colors[:num_classes_viz])
 
     fig, axs = plt.subplots(1, 2, figsize=(14, 6))
-    axs[0].imshow(gt_map, cmap=cmap, vmin=1, vmax=num_classes)
-    axs[0].set_title("Ground Truth")
-    axs[0].axis('off')
+    axs[0].imshow(gt_map, cmap=cmap, vmin=1, vmax=num_classes_viz); axs[0].set_title("Ground Truth"); axs[0].axis('off')
+    axs[1].imshow(pred_map, cmap=cmap, vmin=1, vmax=num_classes_viz); axs[1].set_title(f"Prediction (Acc: {acc:.2f}%)"); axs[1].axis('off')
 
-    axs[1].imshow(pred_map, cmap=cmap, vmin=1, vmax=num_classes)
-    axs[1].set_title(f"Prediction (Acc: {acc:.2f}%)")
-    axs[1].axis('off')
-
-    fig_path = os.path.join(log_root, f"{dataset_name}_2DCNN_run{run_seed}_vis.png")
-    fig_path_pdf = os.path.join(log_root, f"{dataset_name}_2DCNN_run{run_seed}_vis.pdf")
+    fig_path = os.path.join(log_root, f"{dataset_name}_HypelCNN_run{run_seed}_vis.png")
+    fig_path_pdf = os.path.join(log_root, f"{dataset_name}_HypelCNN_run{run_seed}_vis.pdf")
     plt.savefig(fig_path, bbox_inches='tight', dpi=300)
     plt.savefig(fig_path_pdf, bbox_inches='tight')
     plt.close()
@@ -343,14 +447,12 @@ def train_and_evaluate_2d(dataset_name,
     return acc
 
 
-
 if __name__ == "__main__":
     # ====== 根据你的数据集修改 ======
     dataset_name = "chikusei"
 
-    # 公平对比建议：
-    #   1) 先用 pca_components=3 跑常规2D；再用 pca_components=30 与3D保持一致的通道设定做第二组实验
-    pca_components = 3       # 可改为 30
+    # 公平对比：建议 pca_components=30 与 3D/DSFormer 对齐；patch_size=7 与其他一致
+    pca_components = 30
     patch_size = 7
     repeats = 10
 
@@ -358,15 +460,24 @@ if __name__ == "__main__":
     for i in range(repeats):
         seed = i * 10 + 42
         print(f"\n🔁 Running trial {i+1} with seed {seed}")
-        acc = train_and_evaluate_2d(
+        acc = train_and_evaluate_hypelcnn(
             run_seed=seed,
             dataset_name=dataset_name,
             pca_components=pca_components,
             patch_size=patch_size,
             batch_size=128,
-            max_epochs=200,
+            max_epochs=100,
             patience=10,
-            lr=1e-3
+            lr=1e-3,
+            # 下列是 HypelCNN 的可调超参（与原实现保持同名/同义）
+            filter_count=1200,
+            spectral_hierarchy_level=3,
+            spatial_hierarchy_level=3,
+            lrelu_alpha=0.18,
+            bn_decay=0.99,
+            dropout_ratio=0.4,
+            degradation_coeff=3,
+            use_residual=True
         )
         accs.append(acc)
 

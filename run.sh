@@ -2,7 +2,7 @@
 
 # 直接指定环境下的 python 路径
 ENV_PYTHON="/opt/miniconda3/envs/dl_env/bin/python"
-BASE_PATH="ablation/wo_Attention"
+BASE_PATH="comp/HypelCNN"
 
 SCRIPTS=(
     "Botswana/model_Botswana.py"
