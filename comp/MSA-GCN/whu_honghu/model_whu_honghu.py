@@ -1,19 +1,20 @@
-# comp/MambaHSI/Botswana/model_Botswana.py
+# comp/MSA-GCN/Botswana/model_Botswana.py
 import os
 import time
 import json
+
+import h5py
 import math
 import random
 import numpy as np
 import scipy.io as scio
-import h5py
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
-from scipy.io import loadmat
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from scipy.io import loadmat
 from torch.utils.data import DataLoader, TensorDataset
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
@@ -36,14 +37,14 @@ def extract_2d_patches(img_cube, label_map, patch_size=7, ignored_label=0):
     H, W, C = img_cube.shape
     pad = patch_size // 2
     if label_map.shape != (H, W):
-        raise ValueError(f"label_map shape {label_map.shape} != {(H, W)}")
+        raise ValueError(f"label_map shape {label_map.shape} != image spatial shape {(H, W)}")
     if C < 1:
         raise ValueError("img_cube must have at least 1 channel")
     if np.all(label_map == ignored_label):
-        raise ValueError("All labels are ignored; no samples.")
+        raise ValueError("All labels equal to ignored_label; no samples to extract.")
 
     padded_img = np.pad(img_cube, ((pad, pad), (pad, pad), (0, 0)), mode='reflect')
-    padded_label = np.pad(label_map, ((pad, pad), (pad, pad)), mode='constant', constant_values=ignored_label)
+    padded_label = np.pad(label_map, ((pad, pad)), mode='constant', constant_values=ignored_label)
 
     patches, labels = [], []
     for i in range(pad, H + pad):
@@ -54,13 +55,14 @@ def extract_2d_patches(img_cube, label_map, patch_size=7, ignored_label=0):
             patch = padded_img[i - pad:i + pad + 1, j - pad:j + pad + 1, :]
             patch = np.transpose(patch, (2, 0, 1))  # (C,H,W)
             patches.append(patch)
-            labels.append(lab - 1)
+            labels.append(int(lab - 1))
     return np.asarray(patches, dtype='float32'), np.asarray(labels, dtype='int64')
 
 
-def evaluate_and_log_metrics_2d(y_true, y_pred, model, run_seed, dataset_name, acc,
-                                in_channels, patch_size, log_root, train_time=None, val_time=None):
+def evaluate_and_log_metrics(y_true, y_pred, model, run_seed, dataset_name, acc,
+                             in_channels, patch_size, log_root, train_time=None, val_time=None):
     os.makedirs(log_root, exist_ok=True)
+
     conf_mat = confusion_matrix(y_true, y_pred)
     with np.errstate(divide='ignore', invalid='ignore'):
         per_class_acc = conf_mat.diagonal() / conf_mat.sum(axis=1)
@@ -78,7 +80,7 @@ def evaluate_and_log_metrics_2d(y_true, y_pred, model, run_seed, dataset_name, a
             "per_class_accuracy": [round(float(x), 4) for x in per_class_acc.tolist()]
         }, f, indent=2)
 
-    # FLOPs/Params
+    # FLOPs/Params —— 用 (C, P, P) 做 dummy 输入
     try:
         flops, params = get_model_complexity_info(
             model, (in_channels, patch_size, patch_size),
@@ -101,222 +103,161 @@ def evaluate_and_log_metrics_2d(y_true, y_pred, model, run_seed, dataset_name, a
     np.savetxt(os.path.join(log_root, "confusion_matrix.csv"), conf_mat, fmt="%d", delimiter=",")
 
 
-# ===================== 伪 Mamba（无需安装 mamba-ssm） =====================
-# 若以后成功安装 mamba-ssm，可删掉这个类并 `from mamba_ssm import Mamba`
-class Mamba(nn.Module):
+# ===================== MSA-GCN（单模态HSI版，兼容你的训练脚手架） =====================
+def gaussian_graph(x: torch.Tensor, tau: float = 1.0, add_self: bool = True):
     """
-    轻量“伪 Mamba”：保持输入输出长度一致的线性 + 深度可分卷积近似。
-    仅为跑通/对比使用，非官方实现。
-    输入: (B, L, C)  -> 输出: (B, L, C)
+    x: (B, N, D) 节点特征；N=P*P
+    返回 A: (B, N, N) 的归一化相似度图（按节点维 softmax），可近似你给的 dist_mask。
     """
-    def __init__(self, d_model, d_state=16, d_conv=4, expand=2):
+    # 计算 pairwise 欧氏距离的负值（越近越大）
+    # 使用 (x_i - x_j)^2 = x2 + x2^T - 2 x x^T
+    x2 = (x ** 2).sum(dim=-1, keepdim=True)            # (B,N,1)
+    # (x_i - x_j)^2 = x2_i + x2_j - 2<x_i,x_j>
+    dist2 = x2 + x2.transpose(1, 2) - 2.0 * x @ x.transpose(1, 2)  # (B,N,N)
+    sim = torch.exp(-dist2 / (tau * x.size(-1)))        # 高斯核
+    if add_self:
+        sim = sim + torch.eye(sim.size(1), device=x.device).unsqueeze(0)
+    # 行归一化
+    sim = sim / (sim.sum(dim=-1, keepdim=True) + 1e-6)
+    return sim
+
+
+class Attention(nn.Module):
+    """
+    Multi-head Self-Attention（和你贴的实现一致思路）
+    输入 (B, N, D) -> 输出 (B, N, D)
+    """
+    def __init__(self, dim, num_heads=4, head_dim=None, p_drop=0.1):
         super().__init__()
-        hidden = d_model * expand
-        self.proj_in  = nn.Linear(d_model, hidden)
-        self.dwconv   = nn.Conv1d(hidden, hidden, kernel_size=d_conv,
-                                  padding=d_conv // 2, groups=hidden)
-        self.act      = nn.GELU()
-        self.proj_out = nn.Linear(hidden, d_model)
+        if head_dim is None:
+            assert dim % num_heads == 0, "dim must be divisible by num_heads"
+            head_dim = dim // num_heads
+        inner = head_dim * num_heads
+        self.num_heads = num_heads
+        self.scale = head_dim ** -0.5
+        self.to_qkv = nn.Linear(dim, inner * 3, bias=True)
+        self.proj = nn.Sequential(nn.Linear(inner, dim), nn.Dropout(p_drop))
 
     def forward(self, x):
-        # x: (B, L, C)
-        y = self.proj_in(x)          # (B, L, hidden)
-        y = y.transpose(1, 2)        # (B, hidden, L)
-        y = self.dwconv(y)           # (B, hidden, L)
-        y = y.transpose(1, 2)        # (B, L, hidden)
-        y = self.act(y)
-        y = self.proj_out(y)         # (B, L, C)
-        return y
+        B, N, D = x.shape
+        qkv = self.to_qkv(x).chunk(3, dim=-1)  # 3*(B,N,inner)
+        def reshape(t):
+            return t.view(B, N, self.num_heads, -1).permute(0, 2, 1, 3)  # (B,h,N,dh)
+        q, k, v = map(reshape, qkv)
+        attn = (q @ k.transpose(-2, -1)) * self.scale          # (B,h,N,N)
+        attn = attn.softmax(dim=-1)
+        out = attn @ v                                         # (B,h,N,dh)
+        out = out.permute(0, 2, 1, 3).reshape(B, N, -1)        # (B,N,h*dh)
+        out = self.proj(out)                                   # (B,N,D)
+        return out
 
 
-# ===================== MambaHSI 模型（带形状健壮性处理） =====================
-class SpeMamba(nn.Module):
+class GraphConvolution(nn.Module):
     """
-    频域 Mamba（安全版）：
-    - 不把通道永久补到更大，只在内部 reshape 时临时补齐到 token_len * group_ch，然后最后裁回 C。
-    - 残差和归一化都严格用原始 C 通道，避免 x + y 维度不一致。
+    带 attention 的 GCN 层：Y = softmax(A) X W，经 attention 加权再残差
+    input:  X (B,N,Fin)
+            A (B,N,N)
+    output: (B,N,Fout)
     """
-    def __init__(self, channels, token_num=8, use_residual=True, group_num=4):
+    def __init__(self, in_features, out_features, bias=True, att_heads=3, att_head_dim=None, p_drop=0.1):
         super().__init__()
-        self.use_residual = use_residual
-        self.C = channels
+        self.lin = nn.Linear(in_features, out_features, bias=bias)
+        self.att = Attention(out_features, num_heads=att_heads, head_dim=att_head_dim, p_drop=p_drop)
+        self.act = nn.ReLU(inplace=True)
+        self.bn  = nn.BatchNorm1d(out_features)
 
-        # 让单个 token 的通道数尽量接近 C / token_num，但保证 >=1
-        self.group_ch = max(1, channels // max(1, token_num))
-        # 计算需要多少个 token 才能覆盖全部通道
-        self.token_len = math.ceil(channels / self.group_ch)
-        # 内部临时对齐到 token_len * group_ch
-        self.C_int = self.token_len * self.group_ch
-
-        self.mamba = Mamba(
-            d_model=self.group_ch,
-            d_state=16,
-            d_conv=4,
-            expand=2,
-        )
-        # 归一化严格用真实通道数 C
-        self.proj = nn.Sequential(
-            nn.GroupNorm(group_num, self.C),
-            nn.SiLU()
-        )
-
-    def forward(self, x):
-        """
-        x: (B, C, H, W)  ->  (B, C, H, W)
-        """
-        B, C, H, W = x.shape
-        assert C == self.C, f"SpeMamba got C={C}, expected {self.C}"
-
-        # 临时补齐到整数 token_len * group_ch
-        if C < self.C_int:
-            pad_c = self.C_int - C
-            pad = torch.zeros((B, pad_c, H, W), device=x.device, dtype=x.dtype)
-            x_pad = torch.cat([x, pad], dim=1)  # (B, C_int, H, W)
-        else:
-            x_pad = x
-
-        # (B, C_int, H, W) -> (B*H*W, token_len, group_ch)
-        x_re = x_pad.permute(0, 2, 3, 1).contiguous()
-        BHw = B * H * W
-        x_seq = x_re.view(BHw, self.token_len, self.group_ch)
-
-        # Mamba
-        y_seq = self.mamba(x_seq)  # (BHW, token_len, group_ch)
-
-        # 动态获取输出 token 数和 group_ch
-        t_len, g_ch = y_seq.shape[1], y_seq.shape[2]
-        c_out = t_len * g_ch
-
-        # 还原空间结构
-        y = y_seq.view(B, H, W, c_out).permute(0, 3, 1, 2).contiguous()  # (B, c_out, H, W)
-
-        # 裁回真实通道数
-        if c_out >= self.C:
-            y = y[:, :self.C, :, :]
-        else:
-            # 如果输出通道比 C 少，就补零
-            pad_c = self.C - c_out
-            pad = torch.zeros((B, pad_c, H, W), device=x.device, dtype=x.dtype)
-            y = torch.cat([y, pad], dim=1)
-
-        # 投影 & 残差
-        y = self.proj(y)
-        return x + y if self.use_residual else y
+    def forward(self, x, adj):
+        # x: (B,N,Fin) -> (B,N,Fout)
+        support = self.lin(x)                           # XW
+        out = adj @ support                             # A XW
+        # attention reweight
+        attw = self.att(out)                            # (B,N,Fout)
+        out = out * torch.sigmoid(attw)                 # gate
+        # BN按(N作为“序列”，把(N*B, F)送入1dBN)
+        B, N, F = out.shape
+        out = self.bn(out.view(B * N, F)).view(B, N, F)
+        out = self.act(out)
+        return out
 
 
-class SpaMamba(nn.Module):
-    def __init__(self, channels, use_residual=True, group_num=4, use_proj=True):
+class MSAGCNClassifier(nn.Module):
+    """
+    MSA-GCN（单模态 HSI 版）：
+    - 先用 1x1 Conv 把 (C,P,P) 投影到 d_model，作为每个像素节点的特征
+    - 构图 A (高斯核/softmax 归一化)
+    - 堆叠 2~3 层 带注意力的 GCN
+    - 全局池化 (mean over N)
+    - 线性分类为 num_classes
+    """
+    def __init__(self, in_channels, num_classes, patch_size=7,
+                 d_model=64, gcn_layers=2, tau=1.0,
+                 att_heads=4, p_drop=0.1):
         super().__init__()
-        self.use_residual = use_residual
-        self.use_proj = use_proj
-        self.mamba = Mamba(d_model=channels, d_state=16, d_conv=4, expand=2)
-        if use_proj:
-            self.proj = nn.Sequential(nn.GroupNorm(group_num, channels), nn.SiLU())
+        self.patch = patch_size
+        self.d_model = d_model
+        self.tau = tau
 
-    def forward(self, x):
-        # (B,C,H,W) -> (1, L=B*H*W, C) -> Mamba -> reshape back
-        B, C, H, W = x.shape
-        x_re = x.permute(0, 2, 3, 1).contiguous().view(1, B * H * W, C)  # (1, L, C)
-        y = self.mamba(x_re)                                             # (1, L, C)
-        # —— 健壮性：若某些实现导致 L 变化，强制对齐回 L_in —— #
-        L_in, L_out = B * H * W, y.size(1)
-        if L_out != L_in:
-            if L_out > L_in:
-                y = y[:, :L_in, :]
-            else:
-                pad = torch.zeros((1, L_in - L_out, C), device=y.device, dtype=y.dtype)
-                y = torch.cat([y, pad], dim=1)
-        y = y.view(B, H, W, C).permute(0, 3, 1, 2).contiguous()          # (B,C,H,W)
-        if self.use_proj:
-            y = self.proj(y)
-        return y + x if self.use_residual else y
-
-
-class BothMamba(nn.Module):
-    def __init__(self, channels, token_num, use_residual, group_num=4, use_att=True):
-        super().__init__()
-        self.use_att = use_att
-        self.use_residual = use_residual
-        if use_att:
-            self.weights = nn.Parameter(torch.ones(2) / 2)
-            self.softmax = nn.Softmax(dim=0)
-        self.spa_m = SpaMamba(channels, use_residual=use_residual, group_num=group_num)
-        self.spe_m = SpeMamba(channels, token_num=token_num, use_residual=use_residual, group_num=group_num)
-
-    def forward(self, x):
-        spa_x = self.spa_m(x)
-        spe_x = self.spe_m(x)
-        if self.use_att:
-            w = self.softmax(self.weights)
-            y = spa_x * w[0] + spe_x * w[1]
-        else:
-            y = spa_x + spe_x
-        return y + x if self.use_residual else y
-
-
-class MambaHSI(nn.Module):
-    def __init__(self, in_channels=30, hidden_dim=64, num_classes=16,
-                 use_residual=True, mamba_type='both', token_num=4, group_num=4, use_att=True):
-        super().__init__()
-        self.mamba_type = mamba_type
-        self.embed = nn.Sequential(
-            nn.Conv2d(in_channels, hidden_dim, 1, 1, 0),
-            nn.GroupNorm(group_num, hidden_dim),
-            nn.SiLU()
-        )
-        if mamba_type == 'spa':
-            self.mamba = nn.Sequential(
-                SpaMamba(hidden_dim, use_residual, group_num),
-                nn.AvgPool2d(2),
-                SpaMamba(hidden_dim, use_residual, group_num),
-                nn.AvgPool2d(2),
-                SpaMamba(hidden_dim, use_residual, group_num)
-            )
-        elif mamba_type == 'spe':
-            self.mamba = nn.Sequential(
-                SpeMamba(hidden_dim, token_num, use_residual, group_num),
-                nn.AvgPool2d(2),
-                SpeMamba(hidden_dim, token_num, use_residual, group_num),
-                nn.AvgPool2d(2),
-                SpeMamba(hidden_dim, token_num, use_residual, group_num)
-            )
-        else:
-            self.mamba = nn.Sequential(
-                BothMamba(hidden_dim, token_num, use_residual, group_num, use_att),
-                nn.AvgPool2d(2),
-                BothMamba(hidden_dim, token_num, use_residual, group_num, use_att),
-                nn.AvgPool2d(2),
-                BothMamba(hidden_dim, token_num, use_residual, group_num, use_att)
-            )
-        self.cls_head = nn.Sequential(
-            nn.Conv2d(hidden_dim, 128, 1), nn.GroupNorm(group_num, 128), nn.SiLU(),
-            nn.Conv2d(128, num_classes, 1)
+        # 光谱到节点特征：1×1 卷积 + 深度可分卷积（增强局部）
+        self.feat = nn.Sequential(
+            nn.Conv2d(in_channels, d_model, kernel_size=1, bias=False),
+            nn.BatchNorm2d(d_model),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(d_model, d_model, kernel_size=3, padding=1, groups=d_model, bias=False),
+            nn.BatchNorm2d(d_model),
+            nn.ReLU(inplace=True),
         )
 
+        # 多层 GCN
+        layers = []
+        for i in range(gcn_layers):
+            fin = d_model
+            fout = d_model
+            layers.append(GraphConvolution(fin, fout, att_heads=att_heads, p_drop=p_drop))
+        self.gcn = nn.ModuleList(layers)
+
+        self.dropout = nn.Dropout(p_drop)
+        self.cls = nn.Linear(d_model, num_classes)
+
     def forward(self, x):
-        # x : (B, C_in, P, P)
-        x = self.embed(x)
-        x = self.mamba(x)          # 尺寸：P=7 -> 7->3->1（两次池化），输出 (B, hidden, 1, 1)
-        logits_map = self.cls_head(x)  # (B, num_classes, H', W')
-        # 取中心像素 logits，输出 (B, num_classes) 以适配交叉熵
-        B, C, H, W = logits_map.shape
-        c_h, c_w = H // 2, W // 2
-        logits = logits_map[:, :, c_h, c_w]
+        # x: (B,C,P,P)
+        B, C, P, P2 = x.shape
+        assert P == self.patch and P == P2, f"expect square patch {self.patch}, got {x.shape}"
+
+        f = self.feat(x)                      # (B,d,P,P)
+        f = f.permute(0, 2, 3, 1).contiguous().view(B, P * P, self.d_model)  # (B,N,D), N=P*P
+
+        # 构图（每个样本一张图）
+        with torch.no_grad():
+            A = gaussian_graph(f.detach(), tau=self.tau, add_self=True)      # (B,N,N)
+
+        # 堆叠 GCN
+        h = f
+        for layer in self.gcn:
+            h = layer(h, A)
+
+        # 池化 & 分类
+        h = h.mean(dim=1)               # (B,D)
+        h = self.dropout(h)
+        logits = self.cls(h)            # (B,num_classes)
         return logits
 
 
 # ===================== 训练与评估（与2D脚本一致） =====================
-def train_and_evaluate_mambahsi(run_seed=42,
-                                dataset_name="Botswana",
-                                data_path='../../root/data/HSI_dataset/Matlab_data_format/Matlab_data_format/WHU-Hi-HongHu/WHU_Hi_HongHu.mat',
-                                label_path='../../root/data/HSI_dataset/Matlab_data_format/Matlab_data_format/WHU-Hi-HongHu/WHU_Hi_HongHu_gt.mat',
-                                pca_components=30,
-                                patch_size=7,
-                                batch_size=64,
-                                max_epochs=200,
-                                patience=10,
-                                lr=1e-3,
-                                mamba_type='both'):
+def train_and_evaluate_msagcn(run_seed=42,
+                              dataset_name="Botswana",
+                              data_path='../../root/data/HSI_dataset/Matlab_data_format/Matlab_data_format/WHU-Hi-HongHu/WHU_Hi_HongHu.mat',
+                              label_path='../../root/data/HSI_dataset/Matlab_data_format/Matlab_data_format/WHU-Hi-HongHu/WHU_Hi_HongHu_gt.mat',
+                              pca_components=30,
+                              patch_size=7,
+                              batch_size=128,
+                              max_epochs=200,
+                              patience=10,
+                              lr=1e-3,
+                              d_model=64,
+                              gcn_layers=2,
+                              tau=1.0,
+                              att_heads=4,
+                              p_drop=0.1):
     set_seed(run_seed)
 
     # === 读取并自动对齐 H/W/C 轴 ===
@@ -354,31 +295,23 @@ def train_and_evaluate_mambahsi(run_seed=42,
 
     data = chosen  # 确保 data 现在是 (H, W, C)
     H, W, bands = data.shape
-    print(f"[Axis-Aligned] data shape -> (H,W,C)=({H},{W},{bands}), "
-          f"label_map shape -> {label_map.shape}, "
-          f"label_transposed={label_transposed}")
 
-    # 背景/无效标签值（WHU 数据通常 0 为背景）
-    ignored_label = 0
+    # ---- PCA ----
+    C = min(pca_components, bands)
+    data_pca = PCA(n_components=C).fit_transform(data.reshape(-1, bands)).reshape(H, W, C)
 
-    # ---- PCA 降维到 C 通道（默认3；可设为30以公平对比）----
-    data_reshaped = data.reshape(H * W, bands)
-    pca = PCA(n_components=min(pca_components, bands))
-    data_pca = pca.fit_transform(data_reshaped)
-    data_cube = data_pca.reshape(H, W, min(pca_components, bands))
-
-    # ---- Patch 提取 ----
-    patches, patch_labels = extract_2d_patches(
-        data_cube, label_map, patch_size=patch_size, ignored_label=0
-    )
+    # ---- 生成 2D Patch ----
+    patches, patch_labels = extract_2d_patches(data_pca, label_map, patch_size=patch_size, ignored_label=0)
     num_classes = int(patch_labels.max()) + 1
-    in_channels = data_pca.shape[2]
+    in_channels = C
 
-    # 划分 70/15/15
+    # ---- 划分 70/15/15 ----
     X_train_full, X_test, y_train_full, y_test = train_test_split(
-        patches, patch_labels, test_size=0.15, stratify=patch_labels, random_state=42)
+        patches, patch_labels, test_size=0.15, stratify=patch_labels, random_state=42
+    )
     X_train, X_val, y_train, y_val = train_test_split(
-        X_train_full, y_train_full, test_size=0.176, stratify=y_train_full, random_state=42)
+        X_train_full, y_train_full, test_size=0.176, stratify=y_train_full, random_state=42
+    )
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     train_loader = DataLoader(TensorDataset(torch.from_numpy(X_train), torch.from_numpy(y_train)),
@@ -388,8 +321,18 @@ def train_and_evaluate_mambahsi(run_seed=42,
     test_loader = DataLoader(TensorDataset(torch.from_numpy(X_test), torch.from_numpy(y_test)),
                              batch_size=batch_size, shuffle=False)
 
-    # 模型/优化器/损失
-    model = MambaHSI(in_channels=in_channels, num_classes=num_classes, mamba_type=mamba_type).to(device)
+    # ---- 模型/优化器/损失 ----
+    model = MSAGCNClassifier(
+        in_channels=in_channels,
+        num_classes=num_classes,
+        patch_size=patch_size,
+        d_model=d_model,
+        gcn_layers=gcn_layers,
+        tau=tau,
+        att_heads=att_heads,
+        p_drop=p_drop
+    ).to(device)
+
     optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=1e-4)
     criterion = nn.CrossEntropyLoss()
 
@@ -398,13 +341,13 @@ def train_and_evaluate_mambahsi(run_seed=42,
     train_losses, val_losses = [], []
     train_start = time.time()
 
-    # 训练
+    # ---- 训练 ----
     for epoch in range(1, max_epochs + 1):
         model.train(); train_loss = 0.0
         for Xb, yb in train_loader:
             Xb, yb = Xb.to(device), yb.to(device)
             optimizer.zero_grad()
-            out = model(Xb)               # (B, num_classes) —— 已适配
+            out = model(Xb)                 # (B, num_classes)
             loss = criterion(out, yb)
             loss.backward(); optimizer.step()
             train_loss += loss.item()
@@ -427,7 +370,7 @@ def train_and_evaluate_mambahsi(run_seed=42,
 
     train_time = time.time() - train_start
 
-    # 测试
+    # ---- 测试 ----
     if best_model_weights is not None:
         model.load_state_dict(best_model_weights)
     model.eval(); all_true, all_pred = [], []
@@ -441,8 +384,8 @@ def train_and_evaluate_mambahsi(run_seed=42,
     val_time = time.time() - val_start
     print(f"✅ Test Accuracy: {acc:.2f}%")
 
-    # 日志
-    log_root = f"comp_logs/MambaHSI/{dataset_name}/seed_{run_seed}"
+    # ---- 日志 ----
+    log_root = f"comp_logs/MSA-GCN/{dataset_name}/seed_{run_seed}"
     os.makedirs(log_root, exist_ok=True)
     with open(os.path.join(log_root, "loss_curve.json"), "w") as f:
         json.dump({
@@ -450,7 +393,7 @@ def train_and_evaluate_mambahsi(run_seed=42,
             "val_loss": [round(float(l), 4) for l in val_losses]
         }, f, indent=2)
 
-    evaluate_and_log_metrics_2d(
+    evaluate_and_log_metrics(
         y_true=np.array(all_true),
         y_pred=np.array(all_pred),
         model=model,
@@ -464,33 +407,6 @@ def train_and_evaluate_mambahsi(run_seed=42,
         log_root=log_root,
     )
 
-    # 分类图（与2D脚本一致）
-    print("🖼️ Generating classification maps...")
-    pred_map = np.zeros((H, W), dtype=int); gt_map = label_map.copy(); mask = (gt_map != 0)
-    for i in range(H):
-        for j in range(W):
-            if not mask[i, j]:
-                continue
-            patch = data_pca[i - (patch_size // 2): i + (patch_size // 2) + 1,
-                             j - (patch_size // 2): j + (patch_size // 2) + 1, :]
-            if patch.shape != (patch_size, patch_size, in_channels):
-                continue
-            patch = np.transpose(patch, (2, 0, 1))
-            patch_tensor = torch.tensor(patch, dtype=torch.float32).unsqueeze(0).to(device)
-            with torch.no_grad():
-                pred_label = model(patch_tensor).argmax(dim=1).item()
-            pred_map[i, j] = pred_label + 1
-
-    cmap = mcolors.ListedColormap(plt.colormaps['tab20'].colors[:num_classes])
-    fig, axs = plt.subplots(1, 2, figsize=(14, 6))
-    axs[0].imshow(gt_map, cmap=cmap, vmin=1, vmax=num_classes); axs[0].set_title("Ground Truth"); axs[0].axis('off')
-    axs[1].imshow(pred_map, cmap=cmap, vmin=1, vmax=num_classes); axs[1].set_title(f"Prediction (Acc: {acc:.2f}%)"); axs[1].axis('off')
-    fig_path = os.path.join(log_root, f"{dataset_name}_MambaHSI_run{run_seed}_vis.png")
-    fig_path_pdf = os.path.join(log_root, f"{dataset_name}_MambaHSI_run{run_seed}_vis.pdf")
-    plt.savefig(fig_path, bbox_inches='tight', dpi=300)
-    plt.savefig(fig_path_pdf, bbox_inches='tight'); plt.close()
-    print(f"✅ Classification map saved to:\n  {fig_path}\n  {fig_path_pdf}")
-
     return acc
 
 
@@ -502,20 +418,31 @@ if __name__ == "__main__":
     patch_size = 7
     repeats = 3
 
+    # 模型超参（可按需微调）
+    d_model = 64
+    gcn_layers = 2
+    tau = 1.0
+    att_heads = 4
+    p_drop = 0.1
+
     accs = []
     for i in range(repeats):
         seed = i * 10 + 42
         print(f"\n🔁 Running trial {i+1} with seed {seed}")
-        acc = train_and_evaluate_mambahsi(
+        acc = train_and_evaluate_msagcn(
             run_seed=seed,
             dataset_name=dataset_name,
             pca_components=pca_components,
             patch_size=patch_size,
-            batch_size=64,            # 可调
+            batch_size=128,
             max_epochs=200,
             patience=10,
             lr=1e-3,
-            mamba_type='both'         # 'spa' / 'spe' / 'both'
+            d_model=d_model,
+            gcn_layers=gcn_layers,
+            tau=tau,
+            att_heads=att_heads,
+            p_drop=p_drop
         )
         accs.append(acc)
 

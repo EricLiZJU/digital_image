@@ -2,18 +2,19 @@
 import os
 import time
 import json
+
+import h5py
 import math
 import random
 import numpy as np
 import scipy.io as scio
-import h5py
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
-from scipy.io import loadmat
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from scipy.io import loadmat
 from torch.utils.data import DataLoader, TensorDataset
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
@@ -319,6 +320,7 @@ def train_and_evaluate_mambahsi(run_seed=42,
                                 mamba_type='both'):
     set_seed(run_seed)
 
+    # 数据加载
     with h5py.File(data_path, 'r') as f:
         # 通常 v7.3 的数据是以 dataset 名义存储，检查键名（比如 'chikusei'）
         print("Keys:", list(f.keys()))
@@ -349,16 +351,10 @@ def train_and_evaluate_mambahsi(run_seed=42,
     print("label_map shape:", label_map.shape)  # should match (H, W)
     h, w, bands = data.shape
     data_reshaped = data.reshape(h * w, bands)
+    data_pca = PCA(n_components=min(pca_components, bands)).fit_transform(
+        data.reshape(-1, bands)).reshape(h, w, min(pca_components, bands))
 
-    # ---- PCA 降维到 C 通道（默认3；可设为30以公平对比）----
-    pca = PCA(n_components=pca_components)
-    data_pca = pca.fit_transform(data_reshaped)
-    data_cube = data_pca.reshape(h, w, pca_components)
-
-    # ---- 生成 2D Patch ----
-    patches, patch_labels = extract_2d_patches(
-        data_cube, label_map, patch_size=patch_size, ignored_label=0
-    )
+    patches, patch_labels = extract_2d_patches(data_pca, label_map, patch_size=patch_size)
     num_classes = int(patch_labels.max()) + 1
     in_channels = data_pca.shape[2]
 
@@ -452,33 +448,6 @@ def train_and_evaluate_mambahsi(run_seed=42,
         log_root=log_root,
     )
 
-    # 分类图（与2D脚本一致）
-    print("🖼️ Generating classification maps...")
-    pred_map = np.zeros((h, w), dtype=int); gt_map = label_map.copy(); mask = (gt_map != 0)
-    for i in range(h):
-        for j in range(w):
-            if not mask[i, j]:
-                continue
-            patch = data_pca[i - (patch_size // 2): i + (patch_size // 2) + 1,
-                             j - (patch_size // 2): j + (patch_size // 2) + 1, :]
-            if patch.shape != (patch_size, patch_size, in_channels):
-                continue
-            patch = np.transpose(patch, (2, 0, 1))
-            patch_tensor = torch.tensor(patch, dtype=torch.float32).unsqueeze(0).to(device)
-            with torch.no_grad():
-                pred_label = model(patch_tensor).argmax(dim=1).item()
-            pred_map[i, j] = pred_label + 1
-
-    cmap = mcolors.ListedColormap(plt.colormaps['tab20'].colors[:num_classes])
-    fig, axs = plt.subplots(1, 2, figsize=(14, 6))
-    axs[0].imshow(gt_map, cmap=cmap, vmin=1, vmax=num_classes); axs[0].set_title("Ground Truth"); axs[0].axis('off')
-    axs[1].imshow(pred_map, cmap=cmap, vmin=1, vmax=num_classes); axs[1].set_title(f"Prediction (Acc: {acc:.2f}%)"); axs[1].axis('off')
-    fig_path = os.path.join(log_root, f"{dataset_name}_MambaHSI_run{run_seed}_vis.png")
-    fig_path_pdf = os.path.join(log_root, f"{dataset_name}_MambaHSI_run{run_seed}_vis.pdf")
-    plt.savefig(fig_path, bbox_inches='tight', dpi=300)
-    plt.savefig(fig_path_pdf, bbox_inches='tight'); plt.close()
-    print(f"✅ Classification map saved to:\n  {fig_path}\n  {fig_path_pdf}")
-
     return acc
 
 
@@ -488,7 +457,7 @@ if __name__ == "__main__":
 
     pca_components = 30
     patch_size = 7
-    repeats = 3
+    repeats = 2
 
     accs = []
     for i in range(repeats):
