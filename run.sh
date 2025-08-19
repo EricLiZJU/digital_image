@@ -2,10 +2,9 @@
 
 # 直接指定环境下的 python 路径
 ENV_PYTHON="/opt/miniconda3/envs/dl_env/bin/python"
-BASE_PATH="comp/HypelCNN"
+BASE_PATH="comp/HyLiOSR"
 
 SCRIPTS=(
-    "Botswana/model_Botswana.py"
     "chikusei/model_chikusei.py"
     "Indian_pines/model_Indian_pines.py"
     "PaviaU/model_PaviaU.py"
