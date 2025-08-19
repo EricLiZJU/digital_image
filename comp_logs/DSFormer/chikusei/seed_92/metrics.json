@@ -1,0 +1,28 @@
+{
+  "seed": 92,
+  "dataset": "chikusei",
+  "overall_accuracy": 100.0,
+  "average_accuracy": 1.0,
+  "kappa": 1.0,
+  "per_class_accuracy": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ]
+}

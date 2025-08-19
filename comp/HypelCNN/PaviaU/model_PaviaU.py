@@ -385,44 +385,13 @@ def train_and_evaluate_hypelcnn(run_seed=42,
         val_time=val_time
     )
 
-    # ---- 分类图可视化 ----
-    print("🖼️ Generating classification maps...")
-    pred_map = np.zeros((h, w), dtype=int)
-    gt_map = label_map.copy(); mask = (gt_map != 0)
-
-    for i in range(h):
-        for j in range(w):
-            if mask[i, j]:
-                patch = data_cube[i - (patch_size // 2): i + (patch_size // 2) + 1,
-                                  j - (patch_size // 2): j + (patch_size // 2) + 1, :]
-                if patch.shape != (patch_size, patch_size, in_channels):
-                    continue
-                patch = np.transpose(patch, (2, 0, 1))
-                patch_tensor = torch.tensor(patch, dtype=torch.float32).unsqueeze(0).to(device)
-                with torch.no_grad():
-                    pred_label = model(patch_tensor).argmax(dim=1).item()
-                pred_map[i, j] = pred_label + 1
-
-    num_classes_viz = int(patch_labels.max()) + 1
-    cmap = mcolors.ListedColormap(plt.colormaps['tab20'].colors[:num_classes_viz])
-
-    fig, axs = plt.subplots(1, 2, figsize=(14, 6))
-    axs[0].imshow(gt_map, cmap=cmap, vmin=1, vmax=num_classes_viz); axs[0].set_title("Ground Truth"); axs[0].axis('off')
-    axs[1].imshow(pred_map, cmap=cmap, vmin=1, vmax=num_classes_viz); axs[1].set_title(f"Prediction (Acc: {acc:.2f}%)"); axs[1].axis('off')
-
-    fig_path = os.path.join(log_root, f"{dataset_name}_HypelCNN_run{run_seed}_vis.png")
-    fig_path_pdf = os.path.join(log_root, f"{dataset_name}_HypelCNN_run{run_seed}_vis.pdf")
-    plt.savefig(fig_path, bbox_inches='tight', dpi=300)
-    plt.savefig(fig_path_pdf, bbox_inches='tight')
-    plt.close()
-    print(f"✅ Classification map saved to:\n  {fig_path}\n  {fig_path_pdf}")
 
     return acc
 
 
 if __name__ == "__main__":
     # ====== 根据你的数据集修改 ======
-    dataset_name = "Indian_pines"
+    dataset_name = "PaviaU"
 
     # 公平对比：建议 pca_components=30 与 3D/DSFormer 对齐；patch_size=7 与其他一致
     pca_components = 30

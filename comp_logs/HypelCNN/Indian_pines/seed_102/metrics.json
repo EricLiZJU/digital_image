@@ -1,0 +1,18 @@
+{
+  "seed": 102,
+  "dataset": "Indian_pines",
+  "overall_accuracy": 99.7507,
+  "average_accuracy": 0.9947,
+  "kappa": 0.9967,
+  "per_class_accuracy": [
+    1.0,
+    1.0,
+    0.9587,
+    0.9935,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ]
+}
